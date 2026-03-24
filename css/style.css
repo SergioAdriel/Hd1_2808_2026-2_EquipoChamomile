@@ -1,0 +1,75 @@
+nav ul a,
+/* Estilo para el logo en la barra de navegación */
+nav .brand-logo {
+  color: #9E6F21; /* Color del logo */
+}
+
+/* Espaciado entre las líneas del texto */
+p {
+  line-height: 2rem; /* Define la altura de la línea para los párrafos */
+}
+
+/* Color para el botón de apertura del menú lateral */
+.sidenav-trigger {
+  color: #26a69a; /* Color del icono del menú lateral */
+}
+
+/* Estilo para el contenedor del parallax */
+.parallax-container {
+  height: 350px; /* Ajusta la altura de acuerdo a tus necesidades */
+  overflow: hidden; /* Oculta el contenido que se desborda */
+}
+
+/* Estilo para la imagen de fondo del parallax */
+.parallax img {
+  transform: scale(10); /* Escala al 100% para que se vea completa */
+  will-change: transform; /* Optimiza el renderizado al cambiar la transformación */
+  opacity: 0.1; /* Baja la opacidad para el efecto visual */
+}
+
+/* Efecto parallax leve */
+.parallax-container::after {
+  content: ''; /* No muestra texto, solo un pseudo-elemento */
+  position: absolute; /* Posiciona el pseudo-elemento de manera absoluta */
+  top: 0; left: 0; right: 0; bottom: 0; /* Abarca todo el contenedor */
+  background: rgba(0, 0, 0, 0); /* Sin fondo adicional */
+  transform: translateZ(-0.5px) scale(1.1); /* Movimiento más leve para el parallax */
+}
+
+/* Se asegura que la sección del parallax ocupe el 100% del ancho */
+.parallax-container .section {
+  width: 100%;
+}
+
+/* Estilos para dispositivos con pantallas más grandes (mayores a 992px) */
+@media only screen and (max-width : 992px) {
+  .parallax-container .section {
+    position: absolute; /* Posiciona el contenido de la sección de forma absoluta */
+    top: 40%; /* Coloca el contenido más hacia abajo */
+  }
+  #index-banner .section {
+    top: 10%; /* Coloca la sección del banner más arriba */
+  }
+}
+
+/* Estilos para dispositivos con pantallas más pequeñas (mayores a 600px) */
+@media only screen and (max-width : 600px) {
+  #index-banner .section {
+    top: 0; /* Coloca el contenido en la parte superior de la pantalla */
+  }
+}
+
+/* Estilo para los bloques de iconos */
+.icon-block {
+  padding: 0 15px; /* Añade espaciado en los lados del bloque */
+}
+
+/* Ajusta el tamaño de los íconos en los bloques */
+.icon-block .material-icons {
+  font-size: inherit; /* Hace que el tamaño del icono herede el tamaño de la fuente */
+}
+
+/* Estilo para el pie de página */
+footer.page-footer {
+  margin: 0; /* Elimina el margen del pie de página */
+}
