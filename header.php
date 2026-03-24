@@ -1,3 +1,9 @@
+<?php
+// Iniciar sesión SIEMPRE antes de cualquier salida
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!-- Encabeezado de página con enlaces útiles y datos de contacto -->
 <!DOCTYPE html>
 <html lang="es">

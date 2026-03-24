@@ -2,7 +2,9 @@
  <!-- Incluye el archivo de cabecera -->
 
 <?php
-session_start();  // Inicia una sesión PHP
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}  // Inicia una sesión PHP, pero solo si no se ha iniciado previamente para evitar errores de "sesión ya iniciada"
 $telefono = $_SESSION['username'];  // Asigna el valor del usuario (número de teléfono) a la variable $telefono
 
 if (!isset($telefono)) {  // Si no está definido el teléfono (usuario no logueado)
