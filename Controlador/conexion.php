@@ -9,4 +9,5 @@ $conexion = new mysqli($host_db, $user_db, $pass_db, $db_name);
 if($conexion->connect_error){ 
     echo "<h1>Error de conexión con MySQL</h1>";
 }
+$conexion->set_charset("utf8mb4");
 ?>
