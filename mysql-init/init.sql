@@ -1,18 +1,28 @@
--- Crear la tabla residente con índices
+-- Usar codificación correcta
+SET NAMES utf8mb4;
+
+-- Crear base de datos correctamente
+CREATE DATABASE IF NOT EXISTS proyecto
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_spanish_ci;
+
+USE proyecto;
+
+-- Crear tabla residente
 CREATE TABLE residente (
-  nombre_usuario TEXT NOT NULL,
+  nombre_usuario VARCHAR(100) NOT NULL,
   letra_edificio CHAR(1) NOT NULL,
   numero_departamento INT NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE, -- Cambiado a VARCHAR y agregado UNIQUE
-  telefono VARCHAR(10) NOT NULL, -- Aumentado tamaño para flexibilidad
-  password CHAR(10) DEFAULT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  telefono VARCHAR(10) NOT NULL,
+  password VARCHAR(100) DEFAULT NULL,
   fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   permisos INT NOT NULL DEFAULT 2,
   PRIMARY KEY (telefono),
   INDEX idx_edificio_departamento (letra_edificio, numero_departamento)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insertar datos en la tabla residente
+-- Insertar datos correctamente
 INSERT INTO residente (nombre_usuario, letra_edificio, numero_departamento, email, telefono, password, permisos)
 VALUES 
 ('Carlos Gómez', 'A', 102, 'carlos.gomez@correo.com', '5552345678', 'clave1234', 2),
@@ -28,5 +38,5 @@ VALUES
 ('Ricardo López', 'B', 201, 'ricardo.lopez@correo.com', '5559870123', 'riclopez1', 2),
 ('Valeria Vargas', 'A', 102, 'valeria.vargas@correo.com', '5553210987', 'valeria10', 2);
 
--- Mostrar tabla con consultas
+-- Ver datos
 SELECT * FROM residente;
