@@ -3,29 +3,29 @@
 <?php
 // Iniciar la sesión para poder acceder a las variables de sesión
 session_start();
-// Obtener el número de teléfono del usuario desde la variable de sesión 'username'
-$telefono = $_SESSION['username']; 
+// Obtener el ID del entrenador desde la variable de sesión 'trainer_id'
+$trainerId = $_SESSION['trainer_id'];
 
-// Verificar si la variable de sesión 'username' está definida
-if (!isset($telefono)) {
-    // Si no está definida, redirigir al usuario a la página de inicio (index.php)
+// Verificar si el ID está definido
+if (!isset($trainerId)) {
     header("location: ./index.php");
+    exit;
 } else {
     ?>
     <div class="container" style="max-width: 400px; margin-top: 50px;">
-        <h4 class="center-align red-text text-darken-2">Eliminar Usuario</h4>
+        <h4 class="center-align red-text text-darken-2">Eliminar Pokémon</h4>
         
-        <!-- Formulario para eliminar el usuario -->
+        <!-- Formulario para eliminar el Pokémon -->
         <form method="POST" action="./Controlador/deleteUsuario.php" style="margin-top: 30px;">
-            <!-- Campo para ingresar el número de teléfono -->
+            <!-- Campo para ingresar el ID del Pokémon -->
             <div class="input-field">
-                <label for="telefono">Número de Teléfono</label>
-                <input type="text" name="telefono" placeholder="Ingresa el número de teléfono" required>
+                <label for="id">ID de Pokémon</label>
+                <input type="number" name="id" placeholder="Ingresa el ID del Pokémon" required>
             </div>
             
-            <!-- Botón para enviar el formulario y eliminar el usuario -->
+            <!-- Botón para enviar el formulario y eliminar el Pokémon -->
             <div class="center-align" style="margin-top: 20px;">
-                <button type="submit" class="btn waves-effect waves-light red lighten-1">Eliminar Usuario</button>
+                <button type="submit" class="btn waves-effect waves-light red lighten-1">Eliminar Pokémon</button>
             </div>
         </form>
 
