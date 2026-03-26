@@ -231,7 +231,21 @@ CALL insertar_pokemon('Pikachu',    'Acumula electricidad en las bolsas de sus m
 CALL insertar_pokemon('Gengar',     'Se esconde en sombras y enfría todo a su alrededor.','Fantasma,Veneno','Tierra,Psíquico,Fantasma,Siniestro');
 CALL insertar_pokemon('Charizard',  'Vuela buscando rivales fuertes a los que superar.','Fuego,Volador',  'Agua,Roca,Eléctrico');
 CALL insertar_pokemon('Mewtwo',     'Creado en laboratorio con el mayor poder psíquico.','Psíquico',      'Bicho,Fantasma,Siniestro');
-
+CALL insertar_pokemon('Eevee','Puede evolucionar en varias formas.','Normal','Lucha');
+CALL insertar_pokemon('Vaporeon','Cuerpo de agua.','Agua','Eléctrico,Planta');
+CALL insertar_pokemon('Jolteon','Electricidad estática.','Eléctrico','Tierra');
+CALL insertar_pokemon('Flareon','Almacena calor.','Fuego','Agua,Roca,Tierra');
+CALL insertar_pokemon('Snorlax','Siempre duerme.','Normal','Lucha');
+CALL insertar_pokemon('Machamp','Cuatro brazos fuertes.','Lucha','Psíquico,Volador,Hada');
+CALL insertar_pokemon('Alakazam','Altísimo IQ.','Psíquico','Bicho,Fantasma,Siniestro');
+CALL insertar_pokemon('Gyarados','Muy agresivo.','Agua,Volador','Eléctrico,Roca');
+CALL insertar_pokemon('Lapras','Transporta personas.','Agua,Hielo','Eléctrico,Planta,Lucha,Roca');
+CALL insertar_pokemon('Dragonite','Amable y poderoso.','Dragón,Volador','Hielo,Roca,Dragón,Hada');
+CALL insertar_pokemon('Arcanine','Muy veloz.','Fuego','Agua,Roca,Tierra');
+CALL insertar_pokemon('Onix','Cuerpo de roca.','Roca,Tierra','Agua,Planta,Lucha,Hielo,Acero');
+CALL insertar_pokemon('Scyther','Ataca con guadañas.','Bicho,Volador','Fuego,Eléctrico,Hielo,Roca');
+CALL insertar_pokemon('Jigglypuff','Canta para dormir.','Normal,Hada','Acero,Veneno');
+CALL insertar_pokemon('Aerodactyl','Pokémon fósil volador.','Roca,Volador','Agua,Eléctrico,Hielo,Roca,Acero');
 -- ── Consultar la vista ──────────────────────────────────────
 -- SELECT * FROM v_pokedex;
 
