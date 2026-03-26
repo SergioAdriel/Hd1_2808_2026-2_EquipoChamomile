@@ -8,12 +8,12 @@
                 <!-- Título que indica al usuario que ingrese sus datos -->
                 <span class="card-title center-align teal-text text-darken-2">Ingresa tus Datos</span>
                 
-                <!-- Formulario para ingresar el número de teléfono y la contraseña -->
+                <!-- Formulario para ingresar el ID de entrenador y la contraseña -->
                 <form method="POST" action="Controlador/loguear.php">
-                    <!-- Campo para ingresar el número de teléfono -->
+                    <!-- Campo para ingresar el ID de entrenador -->
                     <div class="input-field">
-                        <input type="text" name="telefono" id="telefono" placeholder="Número de Teléfono" required />
-                        <label for="telefono">Número de Teléfono</label>
+                        <input type="number" name="id" id="id" placeholder="ID de Entrenador" required />
+                        <label for="id">ID de Entrenador</label>
                     </div>
                     
                     <!-- Campo para ingresar la contraseña -->
