@@ -1,58 +1,69 @@
-<?php
+<?php 
 require "./header.php";
 ?>
 
-  <!-- Sección principal con una imagen de fondo (parallax) y un título con un botón de inicio de sesión -->
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <h1 class="header center teal-text text-lighten-2 text-">Condominio Citisio</h1>
-        <div class="row center">
-          <h5 class="header col s12 light text-grey text-lighten-2">Gestión eficiente y segura para tu comunidad</h5>
-        </div>
-        <div class="row center">
-          <!-- Botón que redirige al login -->
-          <a href="login.php" id="login-button" class="btn-large waves-effect waves-light teal lighten-1">Iniciar Sesión</a>
-        </div>
+<!-- Banner principal con imagen de Lapras y título dentro de cajita -->
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container center" style="padding-top: 80px;">
+      <!-- Cajita blanca con sombra -->
+      <div class="white-text-box">
+        <h1 class="header black-text" style="font-weight: bold; font-size: 4rem;">Pokédex</h1>
+        <h5 class="header black-text" style="font-weight: bold; font-size: 1.5rem;">Registra y gestiona tus Pokémon favoritos</h5>
       </div>
-    </div>
-    <!-- Imagen de fondo con efecto parallax -->
-    <div class="parallax"><img src="./Media/img/palmera.jpg" alt="Fondo de Palmera"></div>
-  </div>
 
-  <!-- Sección de contenido con tres bloques de servicios -->
-  <div class="container">
-    <div class="section">
-      <div class="row">
-        <!-- Primer bloque de servicio: Seguridad -->
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text text-darken-4"><i class="material-icons">security</i></h2>
-            <h5 class="center brown-text text-darken-2">Seguridad</h5>
-            <p class="light">Controla el acceso al sistema para asegurar que solo residentes y administradores tengan permisos adecuados.</p>
-          </div>
-        </div>
-  
-        <!-- Segundo bloque de servicio: Gestión de Propiedades -->
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text text-darken-4"><i class="material-icons">home</i></h2>
-            <h5 class="center brown-text text-darken-2">Gestión de Propiedades</h5>
-            <p class="light">Lleva un registro de las propiedades y sus residentes, facilitando la comunicación y el mantenimiento.</p>
-          </div>
-        </div>
-  
-        <!-- Tercer bloque de servicio: Notificaciones -->
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text text-darken-4"><i class="material-icons">event</i></h2>
-            <h5 class="center brown-text text-darken-2">Notificaciones</h5>
-            <p class="light">Mantén informados a los residentes sobre eventos y anuncios importantes de la comunidad.</p>
-          </div>
-        </div>
+      <!-- Botón de registro -->
+      <div class="row center" style="margin-top: 30px;">
+        <a href="login.php" id="login-button" class="btn-large waves-effect waves-light blue darken-2 hoverable">
+          Iniciar Registro
+        </a>
       </div>
     </div>
   </div>
+  <div class="parallax"><img src="./Controlador/Media/img/test3.png" alt="Fondo de Lapras"></div>
+</div>
+
+<!-- Sección de características con estilo Pokédex y NES.css -->
+<div class="nes-container is-rounded" style="padding: 20px; margin: 20px 0; background-color: #f0f0f0;">
+  <div class="row" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+
+    <!-- Bloque 1: Registro Seguro -->
+    <div class="col" style="flex: 1 1 250px;">
+      <div class="nes-container with-title is-rounded" style="background-color: #FFF5E1; padding: 20px;">
+        <p class="title">Registro Seguro</p>
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #FF6F61;">
+          <i class="nes-ash"></i>
+        </div>
+        <p class="center" style="color: #333;">Tus Pokémon y datos personales estarán protegidos en nuestra Pokédex.</p>
+      </div>
+    </div>
+
+    <!-- Bloque 2: Gestión de Pokémon -->
+    <div class="col" style="flex: 1 1 250px;">
+      <div class="nes-container with-title is-rounded" style="background-color: #E1FFF5; padding: 20px;">
+        <p class="title">Gestión de Pokémon</p>
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #61D4FF;">
+          <i class="nes-bulbasaur"></i>
+        </div>
+        <p class="center" style="color: #333;">Añade, edita y organiza tus Pokémon para mantener tu Pokédex completa y ordenada.</p>
+      </div>
+    </div>
+
+    <!-- Bloque 3: Alertas -->
+    <div class="col" style="flex: 1 1 250px;">
+      <div class="nes-container with-title is-rounded" style="background-color: #FFE1E1; padding: 20px;">
+        <p class="title">Alertas</p>
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #FF61A6;">
+          <i class="nes-charmander"></i>
+        </div>
+        <p class="center" style="color: #333;">Recibe notificaciones de nuevos Pokémon o eventos especiales en tu Pokédex.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+</div>
 <?php
-  require "./footer.php"
+require "./footer.php";
 ?>

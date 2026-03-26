@@ -1,47 +1,53 @@
 <?php
-// Iniciar sesión SIEMPRE antes de cualquier salida
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<!-- Encabeezado de página con enlaces útiles y datos de contacto -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <!-- Metaetiquetas que especifican el tipo de documento y el lenguaje de la página -->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Condominio Citisio</title>
-  <!-- Favicon -->
-  <link rel="icon" href="./Media/favicon/favicon.png" type="image/png"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokédex</title>
+  <link rel="icon" href="./Controlador/Media/favicon/favicon.png" type="image/png"/>
 
-  <!-- Inclusión de fuentes y estilos para Materialize (biblioteca de CSS y JS para interfaces modernas) -->
+  <!-- Materialize CSS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet"/>
+
+  <!-- NES.css (retro) -->
+  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+    }
+  </style>
 </head>
 <body>
 <header class="header-section" style="margin-bottom: 20px;">
-  <!-- Barra de navegación con Materialize -->
-  <nav class="white" role="navigation">
+  <!-- Barra de navegación -->
+  <nav class="red darken-2" role="navigation">
     <div class="nav-wrapper container">
-      <!-- Logo del sitio web -->
-      <a id="logo-container" href="index.php" class="brand-logo">Condominio Citisio</a>
-      
-      <!-- Menú de navegación para pantallas grandes (no se muestra en dispositivos medianos o pequeños) -->
+      <!-- Logo / Link principal -->
+<a id="logo-container" href="index.html" class="brand-logo white-text" style="font-weight: bold; font-family: 'Roboto', sans-serif; display: flex; align-items: center;">
+  <i class="nes-pokeball" style="font-size: 2rem;"></i>
+</a>
+      <!-- Menú de navegación para pantallas grandes -->
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Servicios</a></li>
-        <li><a href="mailto:contacto@citisio.com">Ayuda</a></li>
+        <li><a href="index.html" class="white-text" style="font-weight: bold;">Registro</a></li>
+        <li><a href="combate.php" class="white-text" style="font-weight: bold;">Combate</a></li>
       </ul>
 
-      <!-- Menú de navegación para dispositivos pequeños (sidenav que se muestra al hacer clic en el ícono de menú) -->
+      <!-- Menú lateral para dispositivos pequeños -->
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Servicios</a></li>
-        <li><a href="mailto:contacto@citisio.com">Ayuda</a></li>
+        <li><a href="index.html">Registro</a></li>
+        <li><a href="combate.php">Combate</a></li>
       </ul>
-      <!-- Botón que activa el menú lateral (sidenav) en dispositivos pequeños -->
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <!-- Botón que activa el sidenav -->
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger white-text"><i class="material-icons">menu</i></a>
     </div>
   </nav>
 </header>

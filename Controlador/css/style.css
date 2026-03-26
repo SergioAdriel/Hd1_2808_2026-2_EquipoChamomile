@@ -73,3 +73,11 @@ p {
 footer.page-footer {
   margin: 0; /* Elimina el margen del pie de página */
 }
+
+.white-text-box {
+    background-color: rgba(255, 255, 255, 0.9); /* fondo blanco semi-transparente */
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    display: inline-block;
+}

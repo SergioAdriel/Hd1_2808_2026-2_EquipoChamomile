@@ -1,33 +1,41 @@
-  <!-- Pie de página con enlaces útiles y datos de contacto -->
-  <footer class="page-footer teal" style="margin-top: 40px;">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Condominio Citisio</h5>
-          <p class="grey-text text-lighten-4">Tu sistema de gestión para un condominio organizado y seguro.</p>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Enlaces Útiles</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Soporte</a></li>
-            <li><a class="white-text" href="#!">Preguntas Frecuentes</a></li>
-            <li><a class="white-text" href="#!">Política de Privacidad</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Contacto</h5>
-          <ul>
-            <li><a class="white-text" href="mailto:contacto@citisio.com">contacto@citisio.com</a></li>
-            <li><a class="white-text" href="#!">Teléfono: 555-123-4567</a></li>
-          </ul>
-        </div>
+<footer class="page-footer white" style="margin-top: 40px; padding-top: 40px; padding-bottom: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); border-top: 3px solid #EE1515;">
+  <div class="container">
+    <div class="row">
+      <!-- Columna 1: Descripción -->
+      <div class="col l6 s12">
+        <h5 class="black-text" style="font-weight: bold; margin-bottom: 10px;">Pokédex</h5>
+        <p class="black-text text-darken-1">Tu sistema para registrar y gestionar tus Pokémon favoritos. Mantén tu Pokédex organizada y lista para cualquier combate.</p>
+      </div>
+
+      <!-- Columna 2: Enlaces útiles -->
+      <div class="col l3 s12">
+        <h5 class="black-text" style="font-weight: bold; margin-bottom: 10px;">Enlaces</h5>
+        <ul style="padding-left: 0; list-style: none;">
+          <li><a class="black-text" href="index.html">Inicio</a></li>
+          <li><a class="black-text" href="combate.php">Combate</a></li>
+          <li><a class="black-text" href="#!">Política de Privacidad</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Contacto -->
+      <div class="col l3 s12">
+        <h5 class="black-text" style="font-weight: bold; margin-bottom: 10px;">Contacto</h5>
+        <ul style="padding-left: 0; list-style: none;">
+          <li><a class="black-text" href="mailto:contacto@pokedex.com">contacto@pokedex.com</a></li>
+          <li><a class="black-text" href="#!">Teléfono: 555-123-4567</a></li>
+        </ul>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- Scripts necesarios para Materialize (gestión de componentes interactivos) -->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+  <div class="footer-bottom center" style="padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1);">
+    <span class="black-text text-darken-2">© 2026 Pokédex. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<!-- Scripts necesarios para Materialize -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
 </body>
 </html>
