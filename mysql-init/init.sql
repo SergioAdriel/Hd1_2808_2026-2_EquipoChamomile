@@ -1,42 +1,110 @@
--- Usar codificación correcta
-SET NAMES utf8mb4;
+-- Crear base de datos
+CREATE DATABASE IF NOT EXISTS pokedex_app;
+USE pokedex_app;
 
--- Crear base de datos correctamente
-CREATE DATABASE IF NOT EXISTS proyecto
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_spanish_ci;
+-- =========================
+-- TABLA USUARIOS
+-- =========================
+DROP TABLE IF EXISTS combates;
+DROP TABLE IF EXISTS equipo;
+DROP TABLE IF EXISTS usuarios;
 
-USE proyecto;
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
 
--- Crear tabla residente
-CREATE TABLE residente (
-  nombre_usuario VARCHAR(100) NOT NULL,
-  letra_edificio CHAR(1) NOT NULL,
-  numero_departamento INT NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  telefono VARCHAR(10) NOT NULL,
-  password VARCHAR(100) DEFAULT NULL,
-  fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  permisos INT NOT NULL DEFAULT 2,
-  PRIMARY KEY (telefono),
-  INDEX idx_edificio_departamento (letra_edificio, numero_departamento)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- =========================
+-- TABLA EQUIPO
+-- =========================
+CREATE TABLE equipo (
+    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_pokemon INT NOT NULL,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    UNIQUE KEY unique_equipo (id_usuario, id_pokemon),
+    
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB;
 
--- Insertar datos correctamente
-INSERT INTO residente (nombre_usuario, letra_edificio, numero_departamento, email, telefono, password, permisos)
+-- =========================
+-- TRIGGER PARA LIMITAR A 6 POKÉMONES
+-- =========================
+DELIMITER $$
+CREATE TRIGGER limitar_pokemones BEFORE INSERT ON equipo
+FOR EACH ROW
+BEGIN
+    DECLARE total INT;
+    SELECT COUNT(*) INTO total FROM equipo WHERE id_usuario = NEW.id_usuario;
+    IF total >= 6 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Un entrenador no puede tener más de 6 Pokémon.';
+    END IF;
+END$$
+DELIMITER ;
+
+-- =========================
+-- TABLA COMBATES
+-- =========================
+CREATE TABLE combates (
+    id_combate INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    victorias INT DEFAULT 0,
+    derrotas INT DEFAULT 0,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =========================
+-- DATOS DE PRUEBA
+-- =========================
+
+-- Entrenadores
+INSERT INTO usuarios (nombre, telefono, contrasena)
 VALUES 
-('Carlos Gómez', 'A', 102, 'carlos.gomez@correo.com', '5552345678', 'clave1234', 2),
-('Ana Torres', 'C', 101, 'ana.torres@correo.com', '5553456789', 'password1', 2),
-('Luis Hernández', 'B', 201, 'luis.hernandez@correo.com', '5554567890', 'qwerty123', 2),
-('Sofía Martínez', 'A', 201, 'sofia.martinez@correo.com', '5555678901', 'sofia2024', 2),
-('Miguel Rivera', 'C', 202, 'miguel.rivera@correo.com', '5556789012', 'mrivera10', 2),
-('Laura Ramírez', 'D', 101, 'laura.ramirez@correo.com', '5557890123', 'lrpass123', 2),
-('Roberto García', 'B', 102, 'roberto.garcia@correo.com', '5558901234', 'securekey', 2),
-('Elena Sánchez', 'D', 201, 'elena.sanchez@correo.com', '5559012345', 'claveelena', 2),
-('Andrés Pérez', 'A', 102, 'andres.perez@correo.com', '5559123456', 'andres123', 2),
-('Paula Ortega', 'C', 202, 'paula.ortega@correo.com', '5551230987', 'pasegura', 2),
-('Ricardo López', 'B', 201, 'ricardo.lopez@correo.com', '5559870123', 'riclopez1', 2),
-('Valeria Vargas', 'A', 102, 'valeria.vargas@correo.com', '5553210987', 'valeria10', 2);
+('Ash Ketchum', '5512345678', 'pikachu123'),
+('Misty Waterflower', '5512345679', 'staryu123'),
+('Brock Stone', '5512345680', 'onix123');
 
--- Ver datos
-SELECT * FROM residente;
+-- Equipo Pokémon
+-- Ash (equipo completo 6)
+INSERT INTO equipo (id_usuario, id_pokemon) VALUES
+(1, 25), -- Pikachu
+(1, 6),  -- Charizard
+(1, 9),  -- Blastoise
+(1, 1),  -- Bulbasaur
+(1, 4),  -- Charmander
+(1, 7);  -- Squirtle
+
+-- Misty (equipo completo 6)
+INSERT INTO equipo (id_usuario, id_pokemon) VALUES
+(2, 120), -- Staryu
+(2, 121), -- Starmie
+(2, 54),  -- Psyduck
+(2, 116), -- Horsea
+(2, 118), -- Goldeen
+(2, 119); -- Seaking
+
+-- Brock (solo 3 Pokémon)
+INSERT INTO equipo (id_usuario, id_pokemon) VALUES
+(3, 95),  -- Onix
+(3, 74),  -- Geodude
+(3, 111); -- Rhyhorn
+
+-- Combates iniciales
+INSERT INTO combates (id_usuario, victorias, derrotas) VALUES
+(1, 0, 0),
+(2, 0, 0),
+(3, 0, 0);
+
+
+-- La idea es que cada vez que un usuario gane o pierda un combate, se actualice su registro en la tabla "combates" para reflejar su historial.
+-- No puedes entrar a combate si no tiene tu equipo completo de 6 Pokémon.
+-- No puedes tener más de 6 Pokémon en tu equipo.
+-- Puedes eliminar un Pokémon de tu equipo, pero no puedes agregar otro si ya tienes 6.
+-- Puedes eliminar tu cuenta, lo que eliminará automáticamente tu equipo y tu historial de combates gracias a las claves foráneas con ON DELETE CASCADE.
+-- No puedes tener el mismo Pokémon más de una vez en tu equipo gracias a la restricción UNIQUE en la tabla "equipo".
