@@ -27,38 +27,47 @@ require "./header.php";
 <div class="nes-container is-rounded" style="padding: 20px; margin: 20px 0; background-color: #f0f0f0;">
   <div class="row" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
 
-    <!-- Bloque 1: Registro Seguro -->
+    <!-- 1. Bulbasaur (#001) -->
     <div class="col" style="flex: 1 1 250px;">
-      <div class="nes-container with-title is-rounded" style="background-color: #FFF5E1; padding: 20px;">
-        <p class="title">Registro Seguro</p>
-        <div class="center" style="font-size: 60px; margin: 10px 0; color: #FF6F61;">
-          <i class="nes-ash"></i>
-        </div>
-        <p class="center" style="color: #333;">Tus Pokémon y datos personales estarán protegidos en nuestra Pokédex.</p>
-      </div>
-    </div>
-
-    <!-- Bloque 2: Gestión de Pokémon -->
-    <div class="col" style="flex: 1 1 250px;">
-      <div class="nes-container with-title is-rounded" style="background-color: #E1FFF5; padding: 20px;">
+      <div class="nes-container with-title is-rounded" style="background-color: #E1FFE6; padding: 20px;">
         <p class="title">Gestión de Pokémon</p>
-        <div class="center" style="font-size: 60px; margin: 10px 0; color: #61D4FF;">
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #4CAF50;">
           <i class="nes-bulbasaur"></i>
         </div>
-        <p class="center" style="color: #333;">Añade, edita y organiza tus Pokémon para mantener tu Pokédex completa y ordenada.</p>
+        <p class="center" style="color: #333;">
+          Añade, edita y organiza tus Pokémon para mantener tu Pokédex completa y ordenada.
+        </p>
       </div>
     </div>
 
-    <!-- Bloque 3: Alertas -->
+    <!-- 2. Charmander (#004) -->
     <div class="col" style="flex: 1 1 250px;">
-      <div class="nes-container with-title is-rounded" style="background-color: #FFE1E1; padding: 20px;">
-        <p class="title">Alertas</p>
-        <div class="center" style="font-size: 60px; margin: 10px 0; color: #FF61A6;">
+      <div class="nes-container with-title is-rounded" style="background-color: #FFF0E1; padding: 20px;">
+        <p class="title">Registro Seguro</p>
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #FF5722;"> 
           <i class="nes-charmander"></i>
         </div>
-        <p class="center" style="color: #333;">Recibe notificaciones de nuevos Pokémon o eventos especiales en tu Pokédex.</p>
+        <p class="center" style="color: #333;">
+          Tus Pokémon y datos personales estarán protegidos en nuestra Pokédex.
+        </p>
       </div>
     </div>
+
+    <!-- 3. Squirtle (#007) -->
+    <div class="col" style="flex: 1 1 250px;">
+      <div class="nes-container with-title is-rounded" style="background-color: #E1F0FF; padding: 20px;">
+        <p class="title">Alertas</p>
+        <div class="center" style="font-size: 60px; margin: 10px 0; color: #2196F3;">
+          <i class="nes-squirtle"></i>
+        </div>
+        <p class="center" style="color: #333;">
+          Recibe notificaciones de nuevos Pokémon o eventos especiales en tu Pokédex.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
   </div>
 </div>

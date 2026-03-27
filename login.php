@@ -1,32 +1,58 @@
 <?php require "./header.php"; ?>
 
-<!-- Estructura de la página de inicio de sesión -->
+<?php
+// Mensaje opcional (ej: registro exitoso)
+$mensaje = $_GET['msg'] ?? '';
+?>
+
 <div class="row">
     <div class="col s12 m5 offset-m3">
         <div class="card">
             <div class="card-content">
-                <!-- Título que indica al usuario que ingrese sus datos -->
-                <span class="card-title center-align teal-text text-darken-2">Ingresa tus Datos</span>
-                
-                <!-- Formulario para ingresar el número de teléfono y la contraseña -->
-                <form method="POST" action="Controlador/loguear.php">
-                    <!-- Campo para ingresar el número de teléfono -->
+
+                <span class="card-title center-align teal-text text-darken-2">
+                    Iniciar Sesión
+                </span>
+
+                <!-- Mensaje de éxito -->
+                <?php if ($mensaje === 'registrado') { ?>
+                    <p class="green-text center-align">
+                        ✅ Registro exitoso, ahora inicia sesión
+                    </p>
+                <?php } ?>
+
+                <!-- FORMULARIO LOGIN -->
+                <form method="POST" action="./Controlador/loguear.php">
+
+                    <!-- Usuario (teléfono o nombre) -->
                     <div class="input-field">
-                        <input type="text" name="telefono" id="telefono" placeholder="Número de Teléfono" required />
-                        <label for="telefono">Número de Teléfono</label>
+                        <input type="text" name="usuario" id="usuario" required />
+                        <label for="usuario">Teléfono o Nombre</label>
                     </div>
-                    
-                    <!-- Campo para ingresar la contraseña -->
+
+                    <!-- Contraseña -->
                     <div class="input-field">
-                        <input type="password" name="clave" id="clave" placeholder="Contraseña" required />
+                        <input type="password" name="clave" id="clave" required />
                         <label for="clave">Contraseña</label>
                     </div>
-                    
-                    <!-- Botón de envío centrado -->
+
+                    <!-- Botón -->
                     <div class="center-align">
-                        <button type="submit" class="btn-large waves-effect waves-light teal lighten-1" style="margin-right: 10px;">Iniciar Sesión</button>
+                        <button type="submit" class="btn-large waves-effect waves-light teal lighten-1">
+                            Iniciar Sesión
+                        </button>
                     </div>
+
                 </form>
+
+                <!-- REGISTRO -->
+                <div class="center-align" style="margin-top: 25px;">
+                    <p>¿No tienes cuenta?</p>
+                    <a href="registroVista.php" class="btn waves-effect waves-light blue lighten-1">
+                        Registrarse
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

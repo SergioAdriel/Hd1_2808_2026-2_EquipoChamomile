@@ -1,19 +1,44 @@
 <?php require "./header.php"; ?>
 
+<?php
+// Obtener el tipo de error desde la URL
+$mensaje = $_GET['msg'] ?? '';
+?>
 
-<!-- Estructura principal del contenido de la página de error de login -->
 <div class="row">
     <div class="col s12 m5 offset-m3">
         <div class="card">
-            <div class="card-content">
-                <div class="center-align">
-                    <!-- Título del mensaje de error de login -->
-                    <span class="card-title red-text text-darken-2">Error de Login</span>
-                    <!-- Mensaje que indica al usuario que debe intentar nuevamente con los datos correctos -->
-                    <p>Vuelve a intentarlo con tus datos correctos.</p>
-                    <!-- Botón para regresar al formulario de login -->
-                    <a href="login.php" class="btn waves-effect waves-light blue">Regresar</a>
+            <div class="card-content center-align">
+
+                <span class="card-title red-text text-darken-2">
+                    Error de Login
+                </span>
+
+                <?php if ($mensaje === 'usuario') { ?>
+                    <p>❌ El usuario o teléfono no existe.</p>
+
+                <?php } elseif ($mensaje === 'clave') { ?>
+                    <p>❌ La contraseña es incorrecta.</p>
+
+                <?php } else { ?>
+                    <p>❌ Ocurrió un error al iniciar sesión.</p>
+                <?php } ?>
+
+                <p class="grey-text">Intenta nuevamente con tus datos correctos.</p>
+
+                <div style="margin-top: 20px;">
+                    <a href="index.php" class="btn waves-effect waves-light blue">
+                        Regresar
+                    </a>
                 </div>
+
+                <div style="margin-top: 15px;">
+                    <p>¿No tienes cuenta?</p>
+                    <a href="registroVista.php" class="btn green">
+                        Registrarse
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

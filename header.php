@@ -32,18 +32,18 @@ if (session_status() === PHP_SESSION_NONE) {
   <nav class="red darken-2" role="navigation">
     <div class="nav-wrapper container">
       <!-- Logo / Link principal -->
-<a id="logo-container" href="index.html" class="brand-logo white-text" style="font-weight: bold; font-family: 'Roboto', sans-serif; display: flex; align-items: center;">
+<a id="logo-container" href="index.php" class="brand-logo white-text" style="font-weight: bold; font-family: 'Roboto', sans-serif; display: flex; align-items: center;">
   <i class="nes-pokeball" style="font-size: 2rem;"></i>
 </a>
       <!-- Menú de navegación para pantallas grandes -->
       <ul class="right hide-on-med-and-down">
-        <li><a href="index.html" class="white-text" style="font-weight: bold;">Registro</a></li>
+        <li><a href="index.php" class="white-text" style="font-weight: bold;">Registro</a></li>
         <li><a href="combate.php" class="white-text" style="font-weight: bold;">Combate</a></li>
       </ul>
 
       <!-- Menú lateral para dispositivos pequeños -->
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="index.html">Registro</a></li>
+        <li><a href="index.php">Registro</a></li>
         <li><a href="combate.php">Combate</a></li>
       </ul>
       <!-- Botón que activa el sidenav -->

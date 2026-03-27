@@ -1,13 +1,14 @@
 <?php
-$host_db = "db";          // nombre del contenedor MySQL
+$host_db = "db";
 $user_db = "root";
-$pass_db = "root";        // misma que docker-compose
-$db_name = "proyecto";    // misma que docker-compose
+$pass_db = "root";
+$db_name = "pokedex_app"; 
 
 $conexion = new mysqli($host_db, $user_db, $pass_db, $db_name);
 
 if($conexion->connect_error){ 
-    echo "<h1>Error de conexión con MySQL</h1>";
+    die("Error de conexión: " . $conexion->connect_error);
 }
+
 $conexion->set_charset("utf8mb4");
 ?>
