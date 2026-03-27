@@ -1,97 +1,234 @@
-<?php require "./header.php"; ?>
- <!-- Incluye el archivo de cabecera -->
+<?php
+session_start();
+
+if (!isset($_SESSION['trainer_id'])) {
+    header("Location: index.php");
+    exit;
+}
+
+require "./header.php";
+require "./Controlador/conexion.php";
+
+$id_usuario = $_SESSION['trainer_id'];
+$nombre = $_SESSION['trainer_name'];
+?>
+
+<style>
+body {
+    background: #f5f5f5;
+}
+
+.poke-card {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.poke-card:hover {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 15px rgba(0,0,0,0.3);
+}
+
+.poke-img {
+    width: 96px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+#sugerencias {
+    background: white;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: auto;
+    list-style: none;
+    padding: 0;
+}
+</style>
+
+<div class="container center-align">
+    <h4>Bienvenido entrenador</h4>
+    <h5><?php echo $nombre; ?></h5>
+    <a href="Controlador/salir.php" class="btn red">Salir</a>
+</div>
+
+<!-- ========================= -->
+<!-- 🧑 TU EQUIPO -->
+<!-- ========================= -->
+
+<h5 class="center-align">Tu equipo</h5>
+
+<div class="row">
+<?php
+$sql = "SELECT id_pokemon FROM equipo WHERE id_usuario = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $id_usuario);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()):
+?>
+    <div class="col s12 m3 center-align">
+        <div class="poke-card">
+
+            <img class="poke-img"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?php echo $row['id_pokemon']; ?>.png">
+
+            <p>#<?php echo $row['id_pokemon']; ?></p>
+
+            <form method="POST" action="Controlador/eliminarPokemon.php">
+                <input type="hidden" name="pokemon" value="<?php echo $row['id_pokemon']; ?>">
+                <button class="btn red">Eliminar</button>
+            </form>
+
+        </div>
+    </div>
+<?php endwhile; ?>
+</div>
+
+<!-- ========================= -->
+<!-- ➕ AGREGAR POKÉMON -->
+<!-- ========================= -->
+
+<div class="container center-align">
 
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}  // Inicia una sesión PHP, pero solo si no se ha iniciado previamente para evitar errores de "sesión ya iniciada"
-$telefono = $_SESSION['username'];  // Asigna el valor del usuario (número de teléfono) a la variable $telefono
+$sql = "SELECT COUNT(*) total FROM equipo WHERE id_usuario = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $id_usuario);
+$stmt->execute();
+$count = $stmt->get_result()->fetch_assoc()['total'];
 
-if (!isset($telefono)) {  // Si no está definido el teléfono (usuario no logueado)
-    header("location: ./index.php");  // Redirige a la página de inicio (login)
-} else {  
-    // Mensaje de bienvenida con estilos
-    echo "<div class='container center-align' style='margin-top: 20px;'>
-            <h4 class='blue-text text-darken-2'>¡Bienvenido!</h4>
-            <h5>Tu número de teléfono es <span class='teal-text'>$telefono</span></h5>
-          </div>";
-
-    // Botón de salir que redirige al controlador para cerrar sesión
-    echo "<div class='container center-align' style='margin-top: 20px;'>
-            <a href='Controlador/salir.php' class='btn waves-effect waves-light teal lighten-1'>Salir</a>
-          </div>";
-
-    // Conexión a la base de datos
-    require "./Controlador/conexion.php";  
-    mysqli_set_charset($conexion, 'utf8');  // Establece la codificación de caracteres a UTF-8
-
-    // Consulta SQL para obtener todos los registros de la tabla 'residente'
-    $consulta_sql = "SELECT * FROM residente";  
-    $resultado = $conexion->query($consulta_sql);  // Ejecuta la consulta SQL
-
-    $count = mysqli_num_rows($resultado);  // Cuenta la cantidad de filas obtenidas en el resultado
-
-    // Muestra una tabla con los registros de los residentes
-    echo "<div class='container' style='overflow-x:auto; margin-top: 20px;'>";
-    echo "<table class='highlight bordered responsive-table centered'>
-            <thead>
-                <tr>
-                    <th>Nombre de Usuario</th>
-                    <th>Teléfono</th>
-                    <th>Edificio</th>
-                    <th>Número de Departamento</th>
-                    <th>Correo Electrónico</th>
-                    <th>Contraseña</th>
-                    <th>Fecha de Registro</th>
-                    <th>Permisos</th>
-                </tr>
-            </thead>
-            <tbody>";
-
-    if ($count > 0) {  // Si hay registros en la base de datos
-        // Muestra cada registro en una fila de la tabla
-        while ($row = mysqli_fetch_assoc($resultado)) {  
-            echo "<tr>";
-            echo "<td>" . htmlspecialchars($row['nombre_usuario']) . "</td>";  // Muestra el nombre de usuario
-            echo "<td>" . htmlspecialchars($row['telefono']) . "</td>";  // Muestra el teléfono
-            echo "<td>" . htmlspecialchars($row['letra_edificio']) . "</td>";  // Muestra la letra del edificio
-            echo "<td>" . htmlspecialchars($row['numero_departamento']) . "</td>";  // Muestra el número de departamento
-            echo "<td>" . htmlspecialchars($row['email']) . "</td>";  // Muestra el correo electrónico
-            echo "<td>" . htmlspecialchars($row['password']) . "</td>";  // Muestra la contraseña
-            echo "<td>" . htmlspecialchars($row['fecha_registro']) . "</td>";  // Muestra la fecha de registro
-            echo "<td>" . htmlspecialchars($row['permisos']) . "</td>";  // Muestra los permisos
-            echo "</tr>";
-        }
-        echo "</tbody></table>";
-    } else {
-        // Si no hay registros, muestra un mensaje de "Sin ningún registro"
-        echo "<h5 class='center-align red-text'>Sin ningún registro</h5>";
-    }
-
-    echo "</div>"; 
-
-    // Botones para eliminar usuario o registrar uno nuevo
-    echo "<div class='container center-align' style='margin-top: 20px;'>
-            <a href='eliminarUsuario.php' class='btn waves-effect waves-light red lighten-1' style='margin-right: 10px;'>Eliminar Usuario</a>
-            <a href='registro.php' class='btn waves-effect waves-light blue lighten-1'>Registro</a>
-          </div>";
+if ($count >= 6) {
+    echo "<p class='red-text'>Equipo completo (6 Pokémon)</p>";
 }
 ?>
-<?php require "./footer.php"; ?>  <!-- Incluye el archivo de pie de página -->
 
-<!-- Script para actualizar la tabla dinámicamente -->
-<script>
-function actualizarTabla() {
-    fetch('actualizarTabla.php')  // Hace una solicitud al archivo 'actualizarTabla.php' para obtener los datos más recientes
-        .then(response => response.text())  // Convierte la respuesta a texto
-        .then(data => {
-            document.querySelector('tbody').innerHTML = data;  // Reemplaza el contenido de la tabla con los nuevos datos
-        })
-        .catch(error => console.error('Error:', error));  // Muestra un error en consola si ocurre un problema
+<h5>Agregar Pokémon</h5>
+
+<input type="text" id="pokemonInput" placeholder="Escribe un Pokémon">
+<ul id="sugerencias"></ul>
+
+<form method="POST" action="Controlador/agregarPokemon.php">
+    <input type="hidden" name="pokemon" id="pokemonID">
+    <br>
+    <button class="btn green">Agregar</button>
+</form>
+
+</div>
+
+<!-- ========================= -->
+<!-- 👥 ENTRENADORES -->
+<!-- ========================= -->
+
+<h5 class="center-align">Entrenadores</h5>
+
+<?php
+$sql = "SELECT u.id_usuario, u.nombre, e.id_pokemon 
+        FROM usuarios u
+        LEFT JOIN equipo e ON u.id_usuario = e.id_usuario
+        ORDER BY u.id_usuario";
+
+$result = $conexion->query($sql);
+
+$entrenadores = [];
+
+while ($row = $result->fetch_assoc()) {
+    $entrenadores[$row['id_usuario']]['nombre'] = $row['nombre'];
+    if ($row['id_pokemon']) {
+        $entrenadores[$row['id_usuario']]['pokemons'][] = $row['id_pokemon'];
+    }
 }
+?>
 
-// Llamar a la función cada 5 segundos para mantener la tabla actualizada
-setInterval(actualizarTabla, 5000);
+<div class="row">
+<?php foreach ($entrenadores as $id => $data): ?>
+    <div class="col s12 m4">
+        <div class="poke-card center-align">
+
+            <h6><?php echo $data['nombre']; ?></h6>
+
+            <?php if (!empty($data['pokemons'])): ?>
+                <?php foreach ($data['pokemons'] as $poke): ?>
+                    <img class="poke-img"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<?php echo $poke; ?>.png">
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Sin Pokémon</p>
+            <?php endif; ?>
+
+            <?php if ($id == $id_usuario): ?>
+                <p class="green-text">Tu equipo</p>
+            <?php else: ?>
+                <p class="grey-text">Solo ver</p>
+            <?php endif; ?>
+
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+
+<!-- ========================= -->
+<!-- 🔎 AUTOCOMPLETE -->
+<!-- ========================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    let listaPokemon = [];
+
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    .then(res => res.json())
+    .then(data => listaPokemon = data.results);
+
+    const input = document.getElementById("pokemonInput");
+    const sugerencias = document.getElementById("sugerencias");
+    const hidden = document.getElementById("pokemonID");
+
+    input.addEventListener("input", function() {
+
+        let valor = this.value.toLowerCase();
+        sugerencias.innerHTML = "";
+
+        if (valor.length === 0) return;
+
+        let filtrados = listaPokemon
+            .filter(p => p.name.includes(valor))
+            .slice(0,5);
+
+        filtrados.forEach(p => {
+            let id = p.url.split("/")[6];
+
+            let li = document.createElement("li");
+
+            li.innerHTML = `
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
+                <span>${p.name}</span>
+            `;
+
+            li.style.cursor = "pointer";
+            li.style.padding = "10px";
+            li.style.display = "flex";
+            li.style.alignItems = "center";
+            li.style.gap = "10px";
+
+            li.onclick = () => {
+                input.value = p.name;
+                hidden.value = id;
+                sugerencias.innerHTML = "";
+            };
+
+            sugerencias.appendChild(li);
+        });
+    });
+
+});
 </script>
-</body>
-</html>
+
+<?php require "./footer.php"; ?>
