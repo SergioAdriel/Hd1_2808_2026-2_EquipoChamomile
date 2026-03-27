@@ -5,15 +5,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Validar sesión
-$id_usuario = $_SESSION['trainer_id'] ?? null;
-
-if (!$id_usuario) {
+// 🔒 Validar sesión
+if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../index.php");
     exit;
 }
 
-// Preparar consulta segura
+$id_usuario = $_SESSION['trainer_id'];
+
+// 🔥 Preparar eliminación
 $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 
@@ -23,21 +23,24 @@ if (!$stmt) {
 
 $stmt->bind_param("i", $id_usuario);
 
-// Ejecutar eliminación
+// 🚀 Ejecutar
 if ($stmt->execute()) {
 
-    // Destruir sesión
+    // 🔥 limpiar sesión COMPLETA
+    $_SESSION = [];
     session_destroy();
 
-    // Redirigir a inicio
-    header("Location: ../index.php?msg=eliminado");
+    // 👉 redirigir con mensaje
+    header("Location: ../index.php?msg=cuenta_eliminada");
     exit;
 
 } else {
-    echo "Error al eliminar usuario";
+    // ❌ error controlado
+    header("Location: ../principal.php?error=eliminar");
+    exit;
 }
 
-// Cerrar
+// cerrar conexiones
 $stmt->close();
 $conexion->close();
 ?>
