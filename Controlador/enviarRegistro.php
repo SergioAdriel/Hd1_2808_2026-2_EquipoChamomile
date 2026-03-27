@@ -1,34 +1,35 @@
 <?php
-include "./conexion.php";
-mysqli_set_charset($conexion, 'utf8');
+require 'conexion.php';
 
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("location: ../index.php");
+$nombre = trim($_POST['nombre']);
+$telefono = trim($_POST['telefono']);
+$clave = trim($_POST['clave']);
+
+// 🔍 Validar duplicados (sin decir cuál)
+$sql = "SELECT id_usuario FROM usuarios WHERE telefono = ? OR nombre = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("ss", $telefono, $nombre);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    header("Location: ../registroVista.php?error=1");
     exit;
 }
 
-$buscarUsuario = "SELECT * FROM residente WHERE nombre_usuario = '$_POST[nombre_usuario]'";
-$resultadoUsuario = mysqli_query($conexion, $buscarUsuario);
+// 🔥 Insertar usuario
+$sql = "INSERT INTO usuarios (nombre, telefono, contrasena)
+        VALUES (?, ?, ?)";
 
-$buscarTelefono = "SELECT * FROM residente WHERE telefono = '$_POST[telefono]'";
-$resultadoTelefono = mysqli_query($conexion, $buscarTelefono);
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("sss", $nombre, $telefono, $clave);
 
-if (mysqli_num_rows($resultadoUsuario) > 0) {
-    header("location: ./errorNombreUsuario.php");
-    exit;
-} elseif (mysqli_num_rows($resultadoTelefono) > 0) {
-    header("location: ./errorTelefono.php");
-    exit;
+if ($stmt->execute()) {
+    header("Location: ../registroVista.php?ok=1");
 } else {
-    $insertar = "INSERT INTO residente (nombre_usuario, letra_edificio, numero_departamento, email, telefono, password) 
-                     VALUES ('$_POST[nombre_usuario]', '$_POST[letra_edificio]', '$_POST[numero_departamento]', '$_POST[email]', '$_POST[telefono]', '$_POST[password]')";
-
-    if (mysqli_query($conexion, $insertar)) {
-        header("location: ./registroExitoso.php");
-    } else {
-        header("location: ./errorRegistro.php");
-    }
-    exit;
+    header("Location: ../registroVista.php?error=1");
 }
+
+$stmt->close();
+$conexion->close();
 ?>

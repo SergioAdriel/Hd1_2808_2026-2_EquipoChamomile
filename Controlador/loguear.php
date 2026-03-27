@@ -11,7 +11,7 @@ $usuario = trim($_POST['usuario'] ?? '');
 $clave = trim($_POST['clave'] ?? '');
 
 if (empty($usuario) || empty($clave)) {
-    header("Location: errorLoguin.php?msg=campos");
+    header("Location: ./errorLoguin.php?msg=campos");
     exit;
 }
 
@@ -43,12 +43,12 @@ if ($resultado->num_rows === 1) {
         exit;
 
     } else {
-        header("Location: /errorLoguin.php?msg=clave");
+        header("Location: ./errorLoguin.php?msg=clave");
         exit;
     }
 
 } else {
-    header("Location: /errorLoguin.php?msg=usuario");
+    header("Location: ./errorLoguin.php?msg=usuario");
     exit;
 }
 
