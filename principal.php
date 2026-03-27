@@ -55,11 +55,6 @@ body {
 <div class="container center-align">
     <h4>Bienvenido entrenador</h4>
     <h5><?php echo $nombre; ?></h5>
-    <a href="Controlador/salir.php" class="btn red">Salir</a>
-</div>
-<div class="container center-align">
-    <h4>Bienvenido entrenador</h4>
-    <h5><?php echo $nombre; ?></h5>
 
     <a href="Controlador/salir.php" class="btn red">Salir</a>
 
