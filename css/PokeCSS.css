@@ -1,0 +1,80 @@
+body {
+    background: #f5f5f5;
+}
+
+.poke-card {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.poke-card:hover {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 15px rgba(0,0,0,0.3);
+}
+
+.poke-img {
+    width: 96px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+#sugerencias, #sugerenciasNumber {
+    background: white;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: auto;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-container {
+    position: relative;
+    max-width: 300px;
+    margin: auto;
+}
+
+.pokemon-name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 5px 0;
+    text-transform: capitalize;
+}
+
+.search-type-selector {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-type-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-type-btn.active {
+    background-color: #2196F3;
+    color: white;
+}
+
+.search-type-btn.inactive {
+    background-color: #e0e0e0;
+    color: #666;
+}

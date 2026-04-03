@@ -1,61 +1,76 @@
-<?php require "./header.php"; ?>
+<?php 
+session_start();
+if (isset($_SESSION['trainer_id'])) {
+    header("Location: principal.php");
+    exit;
+}
+
+require "./header.php"; 
+?>
 
 <?php
 // Mensaje opcional (ej: registro exitoso)
 $mensaje = $_GET['msg'] ?? '';
 ?>
 
-<div class="row">
-    <div class="col s12 m5 offset-m3">
-        <div class="card">
-            <div class="card-content">
+<div class="container center-align" style="margin-top: 40px;">
 
-                <span class="card-title center-align teal-text text-darken-2">
-                    Iniciar Sesión
-                </span>
+    <h4 class="teal-text">Iniciar Sesión</h4>
 
-                <!-- Mensaje de éxito -->
-                <?php if ($mensaje === 'registrado') { ?>
-                    <p class="green-text center-align">
-                        ✅ Registro exitoso, ahora inicia sesión
-                    </p>
-                <?php } ?>
-
-                <!-- FORMULARIO LOGIN -->
-                <form method="POST" action="./Controlador/loguear.php">
-
-                    <!-- Usuario (teléfono o nombre) -->
-                    <div class="input-field">
-                        <input type="text" name="usuario" id="usuario" required />
-                        <label for="usuario">Teléfono o Nombre</label>
-                    </div>
-
-                    <!-- Contraseña -->
-                    <div class="input-field">
-                        <input type="password" name="clave" id="clave" required />
-                        <label for="clave">Contraseña</label>
-                    </div>
-
-                    <!-- Botón -->
-                    <div class="center-align">
-                        <button type="submit" class="btn-large waves-effect waves-light teal lighten-1">
-                            Iniciar Sesión
-                        </button>
-                    </div>
-
-                </form>
-
-                <!-- REGISTRO -->
-                <div class="center-align" style="margin-top: 25px;">
-                    <p>¿No tienes cuenta?</p>
-                    <a href="registroVista.php" class="btn waves-effect waves-light blue lighten-1">
-                        Registrarse
-                    </a>
-                </div>
-
-            </div>
+    <!-- 🔥 MENSAJE -->
+    <?php if ($mensaje === 'registrado'): ?>
+        <div class="card green lighten-4" style="padding:10px; margin-bottom:20px;">
+            <span class="green-text text-darken-2">
+                ✔ Registro exitoso, ahora inicia sesión 🎉
+            </span>
         </div>
+    <?php endif; ?>
+
+    <!-- CONTENEDOR ESTILO RETRO -->
+    <div class="nes-container is-rounded" style="max-width: 500px; margin:auto;">
+
+        <form method="POST" action="./Controlador/loguear.php">
+
+            <!-- 👤 USUARIO -->
+            <div class="input-field">
+                <input type="text" name="usuario" id="usuario" required />
+                <label for="usuario">Teléfono o Nombre</label>
+            </div>
+
+            <!-- 🔑 CONTRASEÑA -->
+            <div class="input-field">
+                <input type="password" name="clave" id="clave" required />
+                <label for="clave">Contraseña</label>
+            </div>
+
+            <br>
+
+            <!-- BOTÓN -->
+            <button type="submit" class="btn teal lighten-1 waves-effect waves-light">
+                Iniciar Sesión
+            </button>
+
+        </form>
+
     </div>
+
+    <br><br>
+
+    <!-- REGISTRO -->
+    <div class="center-align" style="margin-top: 25px;">
+        <p>¿No tienes cuenta?</p>
+        <a href="registroVista.php" class="btn waves-effect waves-light blue lighten-1">
+            Registrarse
+        </a>
+    </div>
+
+    <br><br>
+
+    <!-- BOTÓN REGRESAR -->
+    <a href="./index.php" class="btn blue">
+        Volver a la pantalla principal
+    </a>
+
 </div>
 
 <?php require "./footer.php"; ?>

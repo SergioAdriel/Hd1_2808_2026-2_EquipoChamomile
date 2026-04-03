@@ -37,14 +37,26 @@ if (session_status() === PHP_SESSION_NONE) {
 </a>
       <!-- Menú de navegación para pantallas grandes -->
       <ul class="right hide-on-med-and-down">
-        <li><a href="index.php" class="white-text" style="font-weight: bold;">Registro</a></li>
-        <li><a href="combate.php" class="white-text" style="font-weight: bold;">Combate</a></li>
+        <?php if (!isset($_SESSION['trainer_id'])): ?>
+        <li><a href="./registroVista.php" class="white-text" style="font-weight: bold;">Registro</a></li>
+        <?php endif; ?>
+
+        <?php if (!isset($_SESSION['trainer_id'])): ?>
+        <li><a href="./login.php" class="white-text" style="font-weight: bold;">Iniciar sesión</a></li>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['trainer_id'])): ?>
+          <li><a href="Controlador/salir.php" class="white-text" style="font-weight: bold;">Salir</a></li>
+        <?php endif; ?>
       </ul>
 
       <!-- Menú lateral para dispositivos pequeños -->
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="index.php">Registro</a></li>
-        <li><a href="combate.php">Combate</a></li>
+        <?php if (!isset($_SESSION['trainer_id'])): ?>
+        <li><a href="./index.php">Registro</a></li>
+        <?php endif; ?>
+
+        <li><a href="./Controlador/salir.php" class="white-text" style="font-weight: bold;">Salir</a></li>
       </ul>
       <!-- Botón que activa el sidenav -->
       <a href="#" data-target="nav-mobile" class="sidenav-trigger white-text"><i class="material-icons">menu</i></a>

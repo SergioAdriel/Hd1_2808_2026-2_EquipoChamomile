@@ -1,4 +1,12 @@
-<?php require "./header.php"; ?>
+<?php 
+session_start();
+if (isset($_SESSION['trainer_id'])) {
+    header("Location: principal.php");
+    exit;
+}
+
+require "./header.php"; 
+?>
 
 <div class="container center-align" style="margin-top: 40px;">
 
@@ -10,9 +18,9 @@
             <span class="red-text text-darken-2">
                 <?php
                 if ($_GET['error'] == 'telefono_invalido') {
-                    echo "⚠ El teléfono debe tener exactamente 10 dígitos";
+                    echo "El teléfono debe tener exactamente 10 dígitos";
                 } else {
-                    echo "⚠ El usuario ya está registrado";
+                    echo "El usuario ya está registrado";
                 }
                 ?>
             </span>
@@ -22,15 +30,17 @@
     <?php if (isset($_GET['ok'])): ?>
         <div class="card green lighten-4" style="padding:10px; margin-bottom:20px;">
             <span class="green-text text-darken-2">
-                ✔ Registro exitoso 🎉
+                Registro exitoso
             </span>
         </div>
     <?php endif; ?>
 
+
+    <!-- Formulario -->
     <div class="nes-container is-rounded" style="max-width: 500px; margin:auto;">
 
         <form action="Controlador/enviarRegistro.php" method="POST">
-
+            
             <!-- 👤 NOMBRE -->
             <div class="input-field">
                 <input type="text" name="nombre" required>
@@ -64,11 +74,19 @@
 
     <br><br>
 
-    <!-- 🔥 BOTÓN REGRESAR -->
-    <a href="./login.php" class="btn blue">
-        ← Volver al Login
-    </a>
+    <div class="center-align" style="margin-top: 25px;">
+        <p>¿Ya tienes cuenta?</p>
+        <a href="login.php" class="btn waves-effect waves-light blue lighten-1">
+            Iniciar sesion
+        </a>
+    </div>
 
+    <br><br>
+    
+    <!-- 🔥 BOTÓN REGRESAR -->
+    <a href="./index.php" class="btn blue">
+        Volver a la pantalla principal
+    </a>
 </div>
 
 <?php require "./footer.php"; ?>

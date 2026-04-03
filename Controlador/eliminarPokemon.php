@@ -17,40 +17,28 @@ if (empty($pokemon)) {
     exit;
 }
 
-// 🔒 validar límite de 6
-$sql_count = "SELECT COUNT(*) total FROM equipo WHERE id_usuario = ?";
-$stmt = $conexion->prepare($sql_count);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$count = $stmt->get_result()->fetch_assoc()['total'];
-
-if ($count >= 6) {
-    header("Location: ../equipo.php?error=limite");
-    exit;
-}
-
-// 🔍 verificar duplicado
+// 🔍 verificar que el Pokémon pertenece al usuario
 $sql_check = "SELECT * FROM equipo WHERE id_usuario = ? AND id_pokemon = ?";
 $stmt = $conexion->prepare($sql_check);
 $stmt->bind_param("ii", $id, $pokemon);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-    header("Location: ../equipo.php?error=repetido");
+if ($result->num_rows === 0) {
+    header("Location: ../equipo.php?error=noexiste");
     exit;
 }
 
-// ✅ insertar
-$sql = "INSERT INTO equipo (id_usuario, id_pokemon) VALUES (?, ?)";
+// 🗑️ eliminar
+$sql = "DELETE FROM equipo WHERE id_usuario = ? AND id_pokemon = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ii", $id, $pokemon);
 
 if (!$stmt->execute()) {
-    die("Error al insertar: " . $stmt->error);
+    die("Error al eliminar: " . $stmt->error);
 }
 
 // 🎉 éxito
-header("Location: ../equipo.php?ok=1");
+header("Location: ../equipo.php?ok=eliminado");
 exit;
 ?>

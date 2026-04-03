@@ -1,4 +1,4 @@
-<?php require "../header.php"; ?>
+<?php require "./header.php"; ?>
 
 <?php
 // Obtener el tipo de error desde la URL
@@ -27,14 +27,14 @@ $mensaje = $_GET['msg'] ?? '';
                 <p class="grey-text">Intenta nuevamente con tus datos correctos.</p>
 
                 <div style="margin-top: 20px;">
-                    <a href="../login.php" class="btn waves-effect waves-light blue">
+                    <a href="./login.php" class="btn waves-effect waves-light blue">
                         Regresar
                     </a>
                 </div>
 
                 <div style="margin-top: 15px;">
                     <p>¿No tienes cuenta?</p>
-                    <a href="../registroVista.php" class="btn green">
+                    <a href="./registroVista.php" class="btn green">
                         Registrarse
                     </a>
                 </div>
@@ -44,4 +44,4 @@ $mensaje = $_GET['msg'] ?? '';
     </div>
 </div>
 
-<?php require "../footer.php"; ?>
+<?php require "./footer.php"; ?>

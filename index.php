@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if (isset($_SESSION['trainer_id'])) {
+    header("Location: principal.php");
+    exit;
+}
 require "./header.php";
 ?>
 
@@ -14,8 +19,8 @@ require "./header.php";
 
       <!-- Botón de registro -->
       <div class="row center" style="margin-top: 30px;">
-        <a href="login.php" id="login-button" class="btn-large waves-effect waves-light blue darken-2 hoverable">
-          Iniciar Registro
+        <a href="registroVista.php" id="login-button" class="btn-large waves-effect waves-light blue darken-2 hoverable">
+          Registrarse
         </a>
       </div>
     </div>

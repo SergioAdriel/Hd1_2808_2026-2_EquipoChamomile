@@ -11,9 +11,9 @@
       <div class="col l3 s12">
         <h5 class="black-text" style="font-weight: bold; margin-bottom: 10px;">Enlaces</h5>
         <ul style="padding-left: 0; list-style: none;">
-          <li><a class="black-text" href="index.html">Inicio</a></li>
+          <li><a class="black-text" href="index.php">Inicio</a></li>
           <li><a class="black-text" href="combate.php">Combate</a></li>
-          <li><a class="black-text" href="#!">Política de Privacidad</a></li>
+          <li><a class="black-text" href="politica_privacidad.php">Política de Privacidad</a></li>
         </ul>
       </div>
 
