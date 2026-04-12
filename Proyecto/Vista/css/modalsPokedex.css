@@ -1,0 +1,172 @@
+/* Estilos generales */
+body {
+    background: #f5f5f5;
+}
+
+/* Tarjetas de Pokémon */
+.poke-card {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.poke-card:hover {
+    transform: scale(1.05);
+    box-shadow: 6px 6px 15px rgba(0,0,0,0.3);
+}
+
+.poke-img {
+    width: 96px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.pokemon-name {
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 5px 0;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+
+.pokemon-number {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+}
+
+/* Estilos para el modal - Fondo blanco */
+.modal {
+    width: 90%;
+    max-width: 600px;
+    border-radius: 20px;
+    background: white;
+    color: #333;
+}
+
+.modal .modal-content {
+    padding: 20px;
+}
+
+.modal .modal-close {
+    color: #666;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 28px;
+    transition: all 0.3s;
+}
+
+.modal .modal-close:hover {
+    background: rgba(0,0,0,0.2);
+    color: #333;
+}
+
+.modal-pokemon-img {
+    width: 120px;
+    margin: 20px auto;
+    display: block;
+    animation: float 2s infinite;
+}
+
+/* Detalles del Pokémon */
+.pokemon-detail {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.pokemon-detail h5 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Badges de tipos */
+.type-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Colores para los tipos de Pokémon */
+.type-normal { background: #A8A878; color: white; }
+.type-fire { background: #F08030; color: white; }
+.type-water { background: #6890F0; color: white; }
+.type-electric { background: #F8D030; color: #333; }
+.type-grass { background: #78C850; color: white; }
+.type-ice { background: #98D8D8; color: #333; }
+.type-fighting { background: #C03028; color: white; }
+.type-poison { background: #A040A0; color: white; }
+.type-ground { background: #E0C068; color: #333; }
+.type-flying { background: #A890F0; color: white; }
+.type-psychic { background: #F85888; color: white; }
+.type-bug { background: #A8B820; color: white; }
+.type-rock { background: #B8A038; color: white; }
+.type-ghost { background: #705898; color: white; }
+.type-dragon { background: #7038F8; color: white; }
+.type-dark { background: #705848; color: white; }
+.type-steel { background: #B8B8D0; color: #333; }
+.type-fairy { background: #EE99AC; color: #333; }
+
+/* Estadísticas */
+.stat-item {
+    margin: 10px 0;
+    padding: 5px 0;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: #2c3e50;
+    min-width: 120px;
+    display: inline-block;
+}
+
+.stat-value {
+    font-family: monospace;
+    font-size: 1rem;
+}
