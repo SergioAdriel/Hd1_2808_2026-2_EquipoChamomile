@@ -5,6 +5,7 @@ if (isset($_SESSION['trainer_id'])) {
     exit;
 }
 require "header.php";
+require "musica.php";
 ?>
 
 <!-- Banner principal con imagen de Lapras y título dentro de cajita -->
