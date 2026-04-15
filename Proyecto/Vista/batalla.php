@@ -1,6 +1,7 @@
 <?php
 session_start();
 require __DIR__ . "/../Controlador/conexion.php";
+require __DIR__ . '/../musica.php';
 require __DIR__ . "/../header.php";
 
 // 🔒 validar sesión
