@@ -1,0 +1,202 @@
+/* ============================================
+   ESTILOS DE LA PANTALLA DE CARGA Y RESULTADOS
+   (Mismo diseño que ya tienes)
+   ============================================ */
+
+.battle-container {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.vs-central {
+    text-align: center;
+    margin: 20px 0;
+}
+.vs-text {
+    font-size: 48px;
+    font-weight: bold;
+    color: #f44336;
+    animation: vsPulse 1s ease-in-out infinite;
+    display: inline-block;
+}
+@keyframes vsPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+.trainer-card {
+    background: #eceff1;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.pokemon-battle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+.pokemon-sprite {
+    width: 70px;
+    transition: transform 0.3s ease;
+}
+.pokemon-sprite:hover {
+    transform: scale(1.1);
+}
+.power-bar-container {
+    background: #eceff1;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+}
+.power-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.power-bar-bg {
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 25px;
+}
+.power-bar {
+    background: #f44336;
+    width: 0%;
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+.battle-messages {
+    background: #eceff1;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    min-height: 80px;
+}
+.battle-message {
+    color: #333;
+    font-size: 14px;
+    margin: 5px 0;
+    animation: messageAppear 0.3s ease;
+}
+@keyframes messageAppear {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes attack {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(15px); }
+    100% { transform: translateX(0); }
+}
+.attacking {
+    animation: attack 0.3s ease;
+}
+@keyframes damage {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; transform: scale(0.95); }
+}
+.damage {
+    animation: damage 0.2s ease;
+}
+.score-popup {
+    position: fixed;
+    font-size: 18px;
+    font-weight: bold;
+    color: #f44336;
+    pointer-events: none;
+    animation: scoreFloat 1s ease-out forwards;
+    z-index: 1000;
+}
+@keyframes scoreFloat {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(1.3); }
+}
+
+/* Keyframes para animaciones de explosión y crítico */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+@keyframes explosionFloat {
+    0% { opacity: 1; transform: scale(0.5); }
+    100% { opacity: 0; transform: scale(2); }
+}
+@keyframes chispaFloat {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-50px) rotate(180deg); }
+}
+@keyframes criticalHit {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.5); opacity: 1; text-shadow: 0 0 20px red; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+/* Estilos de resultados */
+.poke-img {
+    width: 80px;
+    transition: transform 0.3s ease;
+}
+.poke-img:hover {
+    transform: scale(1.1);
+}
+.victoria {
+    color: #4caf50;
+    font-weight: bold;
+}
+.derrota {
+    color: #f44336;
+    font-weight: bold;
+}
+.empate {
+    color: #ff9800;
+    font-weight: bold;
+}
+.resultado-card {
+    animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.marcador {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.detalle-item {
+    transition: transform 0.2s ease;
+}
+.detalle-item:hover {
+    transform: scale(1.02);
+}
+.vs-small {
+    font-size: 14px;
+    font-weight: bold;
+    background: #eceff1;
+    padding: 5px 8px;
+    border-radius: 50%;
+}
+.resultado-badge {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 20px;
+    margin-top: 8px;
+}
+.resultado-badge.victoria {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+.resultado-badge.derrota {
+    background: #ffcdd2;
+    color: #c62828;
+}
