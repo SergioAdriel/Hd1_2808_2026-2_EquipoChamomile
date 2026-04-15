@@ -23,13 +23,13 @@ $mapa_musica = [
     'equipo'              => 'tema_equipo.mp3',
     'retar'               => 'tema_combate.mp3',
     'verTodosPokemon'     => 'tema_pokedex.mp3',
-    'login'               => 'tema_login.mp3',
+    'login'               => 'tema_principal.mp3',
     'registroVista'       => 'tema_registro.mp3',
     'registro'            => 'tema_registro.mp3',
     'principal'           => 'tema_principal.mp3',
     'configuracion'       => 'tema_configuracion.mp3',
     'editarCuenta'        => 'tema_configuracion.mp3',
-    'eliminarUsuario'     => 'tema_configuracion.mp3',
+    'eliminarUsuario'     => 'tema_login.mp3',
     'eliminacionExitosa'  => 'tema_principal.mp3',
     'errorLoguin'         => 'tema_login.mp3',
     'politica_privacidad' => 'tema_principal.mp3',
@@ -175,10 +175,20 @@ $ruta_musica = $base_musica . $archivo;
       eventos.forEach(function (ev) { document.addEventListener(ev, onInteraccion, { once: true }); });
     });
 
-  // Abrir / cerrar panel
+  // Abrir / cerrar panel y play pausa
   btn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    panel.classList.toggle('open');
+      e.stopPropagation();
+
+      if (audio.paused) {
+          audio.play().then(function () {
+              btn.classList.add('playing');
+          }).catch(function () {});
+      } else {
+          audio.pause();
+          btn.classList.remove('playing');
+      }
+      
+      panel.classList.toggle('open');
   });
   closeBtn.addEventListener('click', function (e) {
     e.stopPropagation();

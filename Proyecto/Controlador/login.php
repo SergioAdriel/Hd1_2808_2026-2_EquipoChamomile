@@ -6,6 +6,7 @@ if (isset($_SESSION['trainer_id'])) {
 }
 
 require __DIR__ . "/../header.php"; 
+require __DIR__ . '/../musica.php';
 ?>
 
 <?php

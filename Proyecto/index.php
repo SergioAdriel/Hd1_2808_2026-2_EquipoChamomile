@@ -19,12 +19,22 @@ require "musica.php";
         <h5 class="header black-text" style="font-weight: bold; font-size: 1.5rem;">Registra y gestiona tus Pokémon favoritos</h5>
       </div>
 
-      <!-- Botón de registro -->
-      <div class="row center" style="margin-top: 30px;">
-        <a href="Controlador/registroVista.php" id="login-button" class="btn-large waves-effect waves-light blue darken-2 hoverable">
+      <!-- Botones  -->
+    <div class="row center" style="margin-top: 30px;">
+      <div style="display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+        
+        <a href="Controlador/registroVista.php"
+          class="btn-large waves-effect waves-light blue darken-2 hoverable">
           Registrarse
         </a>
+
+        <a href="Controlador/login.php"
+          class="btn-large waves-effect waves-light red darken-2 hoverable">
+          Iniciar sesion
+        </a>
+
       </div>
+    </div>
 
     </div>
   </div>

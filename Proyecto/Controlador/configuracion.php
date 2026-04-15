@@ -9,6 +9,7 @@ if (!isset($_SESSION['trainer_id'])) {
 // ✅ DEFINIR $accion AQUÍ (antes de usarla)
 $accion = $_GET['accion'] ?? null;
 
+require __DIR__ . '/../musica.php';
 require __DIR__ . "/../header.php";
 
 // Mostrar mensajes de éxito o error

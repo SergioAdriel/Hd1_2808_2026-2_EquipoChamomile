@@ -5,7 +5,7 @@ if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../Controlador/login.php");
     exit;
 }
-
+require __DIR__ . '/../musica.php';
 require __DIR__ . "/../header.php";
 require __DIR__ . "/../Controlador/conexion.php";
 

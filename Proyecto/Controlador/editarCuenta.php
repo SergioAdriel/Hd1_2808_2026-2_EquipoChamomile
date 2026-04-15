@@ -13,6 +13,7 @@ if (!isset($_SESSION['trainer_id'])) {
 
 require __DIR__ . "/conexion.php";
 require __DIR__ . "/../header.php";
+require __DIR__ . '/../musica.php';
 
 // Obtener datos actuales del usuario
 $trainer_id = $_SESSION['trainer_id'];

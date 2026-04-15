@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require __DIR__ . "/../header.php";
+require __DIR__ . '/../musica.php';
 ?>
 
 <!-- Contenido principal -->
@@ -51,7 +52,7 @@ require __DIR__ . "/../header.php";
             <div style="border-top: 2px solid #4CAF50; margin: 10px 0;"></div>
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Juan Gutiérrez Reyes</li>
-              <li style="padding: 8px 0;">_________________</li>
+              <li style="padding: 8px 0;">Arturo Eduardo Leon Magdaleno</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
           </div>
@@ -65,7 +66,7 @@ require __DIR__ . "/../header.php";
             </h4>
             <div style="border-top: 2px solid #FF9800; margin: 10px 0;"></div>
             <ul style="list-style: none; padding: 0;">
-              <li style="padding: 8px 0;">Sergio Adriel</li>
+              <li style="padding: 8px 0;">Sergio Adriel Muñoz Camarena</li>
               <li style="padding: 8px 0;">Leonardo Apolonio Villagómez</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
@@ -80,7 +81,7 @@ require __DIR__ . "/../header.php";
             </h4>
             <div style="border-top: 2px solid #2196F3; margin: 10px 0;"></div>
             <ul style="list-style: none; padding: 0;">
-              <li style="padding: 8px 0;">Irving</li>
+              <li style="padding: 8px 0;">Irving Rios Chavez</li>
               <li style="padding: 8px 0;">_________________</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>

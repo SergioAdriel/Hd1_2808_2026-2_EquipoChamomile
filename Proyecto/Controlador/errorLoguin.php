@@ -4,6 +4,7 @@
 // Obtener el tipo de error desde la URL
 $mensaje = $_GET['msg'] ?? '';
 ?>
+<?php require __DIR__ . '/../musica.php'; ?> 
 
 <div class="row">
     <div class="col s12 m5 offset-m3">

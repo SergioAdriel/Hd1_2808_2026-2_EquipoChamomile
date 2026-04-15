@@ -1,7 +1,7 @@
 <?php
 session_start();
 require __DIR__ . "/../Controlador/conexion.php";
-
+require __DIR__ . '/../musica.php';
 // 🔒 validar sesión
 if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../Controlador/login.php");

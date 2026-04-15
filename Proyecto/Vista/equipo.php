@@ -8,6 +8,7 @@ if (!isset($_SESSION['trainer_id'])) {
 
 require __DIR__ . "/../header.php";
 require __DIR__ . "/../Controlador/conexion.php";
+require __DIR__ . '/../musica.php';
 
 $id_usuario = $_SESSION['trainer_id'];
 $nombre = $_SESSION['trainer_name'];

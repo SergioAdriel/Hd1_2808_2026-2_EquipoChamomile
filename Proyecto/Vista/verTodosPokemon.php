@@ -7,6 +7,7 @@ if (!isset($_SESSION['trainer_id'])) {
 }
 
 require __DIR__ . "/../header.php";
+require __DIR__ . '/../musica.php';
 ?>
 
 <!-- Enlazar el archivo CSS externo -->
@@ -45,7 +46,16 @@ require __DIR__ . "/../header.php";
         <span class="modal-close">&times;</span>
         <div class="center-align">
             <img id="modalPokemonImg" class="modal-pokemon-img" src="" alt="">
-            <h3 id="modalPokemonName"></h3>
+            <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+                <h3 id="modalPokemonName" style="margin:0;"></h3>
+                <button id="btn-cry" title="Escuchar grito" style="
+                    background:none; border:2px solid #cc0000; border-radius:50%;
+                    width:38px; height:38px; cursor:pointer; font-size:18px;
+                    display:flex; align-items:center; justify-content:center;
+                    transition: transform 0.1s;">
+                    🔊
+                </button>
+            </div>
             <p id="modalPokemonNumber" class="pokemon-number"></p>
         </div>
         
@@ -78,6 +88,36 @@ require __DIR__ . "/../header.php";
 
 <script>
 let currentModal = null;
+
+
+// sonidos para los pockemon
+// --- Audio del grito del Pokémon ---
+let cryAudio = null;
+let cryUrl   = null;
+
+function reproducirGrito() {
+    if (!cryUrl) return;
+
+    // Bajar volumen del BGM de fondo mientras suena el cry
+    const bgm = document.getElementById('poke-audio');
+    const volOriginal = bgm ? bgm.volume : null;
+    if (bgm) bgm.volume = 0.08;
+
+    // Parar grito anterior si estaba sonando
+    if (cryAudio) {
+        cryAudio.pause();
+        cryAudio.currentTime = 0;
+    }
+
+    cryAudio = new Audio(cryUrl);
+    cryAudio.volume = 0.7;
+    cryAudio.play().catch(() => {});
+
+    // Restaurar volumen del BGM cuando termina el grito
+    cryAudio.addEventListener('ended', function () {
+        if (bgm && volOriginal !== null) bgm.volume = volOriginal;
+    });
+}
 
 // Diccionario de traducción de tipos de Pokémon
 const typeTranslations = {
@@ -230,6 +270,15 @@ async function abrirModal(url, id, name) {
         
         // Abrir modal
         currentModal.open();
+
+        // Guardar URL del grito
+        cryUrl = pokemon.cries?.latest || pokemon.cries?.legacy || null;
+
+        // Reproducir automáticamente al abrir
+        reproducirGrito();
+
+        // Botón de replay
+        document.getElementById('btn-cry').onclick = reproducirGrito;
         
     } catch (error) {
         console.error("Error cargando detalles del Pokémon:", error);
