@@ -125,6 +125,7 @@ $mostrar_animacion = !isset($_GET['resultado']);
 <script src="./js/batalla.js"></script>
 <input type="hidden" id="rivalId" value="<?php echo $rival; ?>">
 
+
 <?php require __DIR__ . "/../footer.php"; ?>
 
 <?php else: 
@@ -368,5 +369,17 @@ $mostrar_animacion = !isset($_GET['resultado']);
 
 <link rel="stylesheet" href="./css/batalla.css">
 
+
+<script>
+const resultadoFinal = "<?php echo $resultado_final; ?>";
+const ganadasJugador = <?php echo $ganadas1; ?>;
+const ganadasRival = <?php echo $ganadas2; ?>;
+</script>
+
+
+<script src="./js/batalla.js"></script>
+<script src="./js/logros.js"></script>
+
 <?php require __DIR__ . "/../footer.php"; ?>
 <?php endif; ?>
+

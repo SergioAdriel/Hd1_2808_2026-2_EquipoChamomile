@@ -200,3 +200,46 @@
     background: #ffcdd2;
     color: #c62828;
 }
+
+.logro-popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #ffeb3b, #ff9800);
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 9999;
+    animation: logroSlideIn 0.5s ease, logroGlow 1.5s infinite alternate, logroPop 0.3s ease;
+}
+
+/* Entrada */
+@keyframes logroSlideIn {
+    from {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Glow */
+@keyframes logroGlow {
+    from {
+        box-shadow: 0 0 10px rgba(255,215,0,0.6);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255,140,0,0.9);
+    }
+}
+
+/* Pop */
+@keyframes logroPop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
