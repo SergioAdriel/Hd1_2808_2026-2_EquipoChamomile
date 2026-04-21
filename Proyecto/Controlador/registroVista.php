@@ -13,7 +13,6 @@ require __DIR__ . '/../musica.php';
 
     <h4 class="red-text">Registro de Entrenador</h4>
 
-    <!-- 🔥 MENSAJES -->
     <?php if (isset($_GET['error'])): ?>
         <div class="card red lighten-4" style="padding:10px; margin-bottom:20px;">
             <span class="red-text text-darken-2">
@@ -57,7 +56,6 @@ require __DIR__ . '/../musica.php';
                 <label>Teléfono (10 dígitos)</label>
             </div>
 
-            <!-- 🔑 CONTRASEÑA -->
             <div class="input-field">
                 <input type="password" name="clave" required>
                 <label>Contraseña</label>
@@ -84,7 +82,6 @@ require __DIR__ . '/../musica.php';
 
     <br><br>
     
-    <!-- 🔥 BOTÓN REGRESAR -->
     <a href="../index.php" class="btn blue">
         Volver a la pantalla principal
     </a>
