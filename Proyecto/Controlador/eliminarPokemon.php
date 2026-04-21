@@ -2,7 +2,6 @@
 require __DIR__ . '/conexion.php';
 session_start();
 
-// 🔒 validar sesión
 if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../index.php");
     exit;
@@ -11,13 +10,11 @@ if (!isset($_SESSION['trainer_id'])) {
 $id = $_SESSION['trainer_id'];
 $pokemon = $_POST['pokemon'] ?? '';
 
-// 🔒 validar input
 if (empty($pokemon)) {
     header("Location: ../Vista/equipo.php?error=vacio");
     exit;
 }
 
-// 🔍 verificar que el Pokémon pertenece al usuario
 $sql_check = "SELECT * FROM equipo WHERE id_usuario = ? AND id_pokemon = ?";
 $stmt = $conexion->prepare($sql_check);
 $stmt->bind_param("ii", $id, $pokemon);
@@ -29,7 +26,6 @@ if ($result->num_rows === 0) {
     exit;
 }
 
-// 🗑️ eliminar
 $sql = "DELETE FROM equipo WHERE id_usuario = ? AND id_pokemon = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ii", $id, $pokemon);
