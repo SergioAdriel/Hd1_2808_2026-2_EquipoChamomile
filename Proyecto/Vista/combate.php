@@ -11,7 +11,7 @@ require __DIR__ . "/../Controlador/conexion.php";
 
 $id_usuario = $_SESSION['trainer_id'];
 
-// 🔍 verificar si tienes 6 Pokémon
+// verificar si tienes 6 Pokémon
 $sql = "SELECT COUNT(*) total FROM equipo WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
@@ -46,7 +46,7 @@ $total = $stmt->get_result()->fetch_assoc()['total'];
 </div>
 
 <?php
-// 🔥 traer entrenadores + stats
+// traer entrenadores + stats
 $sql = "SELECT u.id_usuario, u.nombre, c.victorias, c.derrotas
         FROM usuarios u
         JOIN combates c ON u.id_usuario = c.id_usuario";
@@ -63,7 +63,7 @@ if ($row['id_usuario'] == $id_usuario) {
     continue; // No mostrar al usuario
 }
 
-// 🔍 obtener equipo del rival
+// obtener equipo del rival
 $sql2 = "SELECT id_pokemon FROM equipo WHERE id_usuario = ?";
 $stmt2 = $conexion->prepare($sql2);
 $stmt2->bind_param("i", $row['id_usuario']);
