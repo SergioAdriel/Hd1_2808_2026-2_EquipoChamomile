@@ -18,7 +18,6 @@ $mensaje = $_GET['msg'] ?? '';
 
     <h4 class="teal-text">Iniciar Sesión</h4>
 
-    <!-- 🔥 MENSAJE -->
     <?php if ($mensaje === 'registrado'): ?>
         <div class="card green lighten-4" style="padding:10px; margin-bottom:20px;">
             <span class="green-text text-darken-2">
