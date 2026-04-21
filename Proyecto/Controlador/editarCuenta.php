@@ -1,11 +1,9 @@
 <?php
 
-// ✅ Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ✅ Verificar que exista la sesión
 if (!isset($_SESSION['trainer_id'])) {
     header("Location: ./login.php");
     exit;
@@ -15,7 +13,6 @@ require __DIR__ . "/conexion.php";
 require __DIR__ . "/../header.php";
 require __DIR__ . '/../musica.php';
 
-// Obtener datos actuales del usuario
 $trainer_id = $_SESSION['trainer_id'];
 
 $sql = "SELECT nombre, telefono FROM usuarios WHERE id_usuario = ?";
@@ -38,7 +35,6 @@ $conexion->close();
 
     <h4>Editar mis datos</h4>
 
-    <!-- 🔥 MENSAJES DE ERROR/ÉXITO (formato del segundo script) -->
     <?php if (isset($_GET['error'])): ?>
         <div class="card red lighten-4" style="padding:10px; margin-bottom:20px;">
             <span class="red-text text-darken-2">
@@ -71,19 +67,16 @@ $conexion->close();
         </div>
     <?php endif; ?>
 
-    <!-- Formulario -->
     <div class="card" style="padding: 30px; max-width: 500px; margin: 20px auto;">
         
         <form action="./actualizarCuenta.php" method="POST" id="formEditar">
             
-            <!-- 👤 NOMBRE -->
             <div class="input-field">
                 <input type="text" name="nombre" id="nombre" 
                        value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
                 <label for="nombre">Nombre completo</label>
             </div>
 
-            <!-- 📱 TELÉFONO -->
             <div class="input-field">
                 <input type="tel" name="telefono" id="telefono" 
                        value="<?php echo htmlspecialchars($usuario['telefono']); ?>" required
@@ -92,14 +85,12 @@ $conexion->close();
                 <label for="telefono">Número de teléfono</label>
             </div>
 
-            <!-- 🔑 CONTRASEÑA -->
             <div class="input-field">
                 <input type="password" name="clave" id="clave" required>
                 <label for="clave">Nueva contraseña</label>
                 <span class="helper-text">Debe escribir su contraseña (nueva o actual)</span>
             </div>
 
-            <!-- 🔑 CONFIRMAR CONTRASEÑA -->
             <div class="input-field">
                 <input type="password" name="confirmar_clave" id="confirmar_clave" required>
                 <label for="confirmar_clave">Confirmar contraseña</label>
@@ -124,7 +115,6 @@ $conexion->close();
 
     <br><br>
 
-    <!-- 🔥 BOTÓN REGRESAR -->
     <a href="./principal.php" class="btn blue">
         Volver al panel principal
     </a>
@@ -132,28 +122,23 @@ $conexion->close();
 </div>
 
 <script>
-// Validación en tiempo real
 document.getElementById('formEditar').addEventListener('submit', function(e) {
     const nombre = document.getElementById('nombre').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
     const clave = document.getElementById('clave').value;
     const confirmar = document.getElementById('confirmar_clave').value;
     
-    // Limpiar mensajes de error anteriores
     const existingErrors = document.querySelectorAll('.error-message');
     existingErrors.forEach(error => error.remove());
     
     let errorMessage = '';
     
-    // Validar que ningún campo esté vacío
     if (nombre === '' || telefono === '' || clave === '' || confirmar === '') {
         errorMessage = 'Todos los campos son obligatorios';
     }
-    // Validar que las contraseñas coincidan
     else if (clave !== confirmar) {
         errorMessage = 'Las contraseñas no coinciden';
     }
-    // Validar teléfono (solo números, al menos 10 dígitos)
     else if (!/^[0-9]{10,}$/.test(telefono)) {
         errorMessage = 'El teléfono debe tener al menos 10 dígitos y solo números';
     }
