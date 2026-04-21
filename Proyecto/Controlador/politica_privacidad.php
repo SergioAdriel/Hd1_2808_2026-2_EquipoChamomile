@@ -98,7 +98,7 @@ require __DIR__ . '/../musica.php';
             <div style="border-top: 2px solid #E91E63; margin: 10px 0;"></div>
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Daniel Gibran Luciano Tellez</li>
-              <li style="padding: 8px 0;">_________________</li>
+              <li style="padding: 8px 0;">Edgar Ivan Hernandez Castellanos</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
           </div>
