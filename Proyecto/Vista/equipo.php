@@ -13,7 +13,7 @@ require __DIR__ . '/../musica.php';
 $id_usuario = $_SESSION['trainer_id'];
 $nombre = $_SESSION['trainer_name'];
 
-// 🔢 contar Pokémon
+// contar Pokémon
 $sql = "SELECT COUNT(*) total FROM equipo WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
@@ -80,7 +80,7 @@ $ok = $_GET['ok'] ?? '';
 
 </div>
 <!-- ========================= -->
-<!-- 🧬 TU EQUIPO -->
+<!-- TU EQUIPO -->
 <!-- ========================= -->
 <div class="row">
 <?php
@@ -118,7 +118,7 @@ while ($row = $result->fetch_assoc()):
             <p class="pokemon-name"><?php echo ucfirst($pokemon_name); ?></p>
             <p>#<?php echo $pokemon_id; ?></p>
 
-            <!-- 🔥 ELIMINAR -->
+            <!-- ELIMINAR -->
             <form method="POST" action="../Controlador/eliminarPokemon.php">
                 <input type="hidden" name="pokemon" value="<?php echo $pokemon_id; ?>">
                 <button class="btn red"
@@ -133,7 +133,7 @@ while ($row = $result->fetch_assoc()):
 </div>
 
 <!-- ========================= -->
-<!-- ➕ AGREGAR POKÉMON -->
+<!-- AGREGAR POKÉMON -->
 <!-- ========================= -->
 
 <div class="container center-align">
@@ -172,7 +172,7 @@ while ($row = $result->fetch_assoc()):
 </div>
 
 <!-- ========================= -->
-<!-- 🔎 AUTOCOMPLETE Y FUNCIONES -->
+<!-- AUTOCOMPLETE Y FUNCIONES -->
 <!-- ========================= -->
 
 <script>
