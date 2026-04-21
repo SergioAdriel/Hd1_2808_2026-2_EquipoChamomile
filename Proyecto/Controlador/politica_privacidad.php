@@ -54,6 +54,8 @@ require __DIR__ . '/../musica.php';
               <li style="padding: 8px 0;">Juan Gutiérrez Reyes</li>
               <li style="padding: 8px 0;">Arturo Eduardo Leon Magdaleno</li>
               <li style="padding: 8px 0;">Luis Erick Garcia Sebastian</li>
+              <li style="padding: 8px 0;">Diego Esteban Barrera Copca</li>
+              <li style="padding: 8px 0;">Juan Alonso Quezada Flores</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
           </div>
