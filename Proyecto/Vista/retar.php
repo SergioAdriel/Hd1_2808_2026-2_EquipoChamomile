@@ -13,13 +13,13 @@ require __DIR__ . '/../musica.php';
 $id_usuario = $_SESSION['trainer_id'];
 $id_rival = $_GET['rival'] ?? null;
 
-// 🔒 validar rival
+// validar rival
 if (!$id_rival || $id_rival == $id_usuario) {
     header("Location: ./combate.php");
     exit;
 }
 
-// 🔍 obtener nombre del rival
+// obtener nombre del rival
 $sql = "SELECT nombre FROM usuarios WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_rival);
@@ -33,7 +33,7 @@ if (!$rival) {
 
 $nombre_rival = $rival['nombre'];
 
-// 🔍 obtener equipo del usuario
+// obtener equipo del usuario
 $sql = "SELECT id_pokemon FROM equipo WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
@@ -45,7 +45,7 @@ while ($row = $resUser->fetch_assoc()) {
     $equipo_user[] = $row['id_pokemon'];
 }
 
-// 🔍 obtener equipo del rival
+// obtener equipo del rival
 $sql = "SELECT id_pokemon FROM equipo WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_rival);
@@ -57,7 +57,7 @@ while ($row = $resRival->fetch_assoc()) {
     $equipo_rival[] = $row['id_pokemon'];
 }
 
-// 🔒 validar equipos completos
+// validar equipos completos
 if (count($equipo_user) < 6 || count($equipo_rival) < 6) {
     header("Location: ./combate.php");
     exit;
@@ -85,7 +85,7 @@ if (count($equipo_user) < 6 || count($equipo_rival) < 6) {
 
     <div class="row">
 
-        <!-- 🧑 TU EQUIPO -->
+        <!-- TU EQUIPO -->
         <div class="col s12 m6">
             <div class="card poke-card center-align" style="padding:15px;">
                 <h6><?php echo $_SESSION['trainer_name']; ?></h6>
@@ -97,7 +97,7 @@ if (count($equipo_user) < 6 || count($equipo_rival) < 6) {
             </div>
         </div>
 
-        <!-- 👤 RIVAL -->
+        <!-- RIVAL -->
         <div class="col s12 m6">
             <div class="card poke-card center-align" style="padding:15px;">
                 <h6><?php echo $nombre_rival; ?></h6>
@@ -113,7 +113,7 @@ if (count($equipo_user) < 6 || count($equipo_rival) < 6) {
 
     <br>
 
-    <!-- 🔥 BOTÓN PELEAR -->
+    <!-- BOTÓN PELEAR -->
     <form method="POST" action="./batalla.php">
         <input type="hidden" name="rival" value="<?php echo $id_rival; ?>">
         <button class="btn red">Pelear</button>
