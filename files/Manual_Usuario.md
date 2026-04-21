@@ -1,65 +1,89 @@
-# Manual de Usuario del Proyecto Pokedex
+# Manual de Usuario
 
-## 1. Objetivo del sistema
+## 1. Proposito
 
-La aplicacion Pokedex permite registrar entrenadores, iniciar sesion, crear un equipo Pokemon de hasta 6 integrantes, consultar informacion de la Pokedex y competir contra otros usuarios registrados.
+Este manual explica como usar la aplicacion web Pokedex desde la perspectiva del entrenador. Se enfoca en las pantallas reales del sistema, los datos que pide cada formulario, las validaciones visibles y las restricciones que el usuario encontrara durante el uso.
 
-## 2. Requisitos para usar el sistema
+## 2. Antes de comenzar
 
-- tener el proyecto en ejecucion
-- abrir un navegador web
-- acceder a `http://localhost:8080`
-- contar con conexion a internet para consultar datos de Pokemon y mostrar sprites
+Para usar el sistema necesitas:
+
+- acceder a la carpeta del proyecto desde una terminal
+- ingresar a la carpeta con el dockerfile
+- ingresa comando de "docker compose up --build" en la terminal
+- debe estar dockerizado y el proyecto se levanta en `http://localhost:8080`, donde puedes abrirlo desde cualquier navegador web
+- conexion a internet, porque la app consulta informacion de Pokemon en PokeAPI y carga sprites remotos
+
+Si entras a la pagina principal y ya habias iniciado sesion, el sistema te envia directamente al panel principal.
 
 ## 3. Pantalla de inicio
 
-Al entrar al sistema se muestra la pagina principal con:
+Ruta de entrada: `Proyecto/index.php`
 
-- boton `Registrarse`
-- boton `Iniciar sesion`
-- descripcion general del proyecto
-- musica de fondo con control flotante
+Desde aqui puedes:
 
-Si ya existe una sesion activa, el sistema redirige automaticamente al panel principal.
+- abrir `Registrarse`
+- abrir `Iniciar sesion`
+- escuchar o pausar la musica de fondo desde el boton flotante con forma de Pokebola
+
+En la barra superior:
+
+- si no has iniciado sesion, aparecen accesos a `Registro` e `Iniciar sesion`
+- si ya iniciaste sesion, aparece la opcion `Salir`
 
 ## 4. Registro de entrenador
 
-Ruta: `Registro`
+Pantalla: `Controlador/registroVista.php`
 
-Pasos:
+Datos solicitados:
 
-1. dar clic en `Registrarse`
-2. capturar nombre de entrenador
-3. capturar telefono de 10 digitos
-4. capturar contrasena
-5. presionar `Registrarse`
+- nombre de entrenador
+- telefono de 10 digitos
+- contrasena
 
-Consideraciones:
+Comportamiento observado:
 
-- no se puede registrar un telefono repetido
-- tampoco se permite reutilizar un nombre ya existente
-- si el registro es exitoso, el usuario puede iniciar sesion
+- el campo telefono solo acepta 10 digitos desde el formulario
+- el sistema no permite registrar un nombre repetido
+- el sistema no permite registrar un telefono repetido
+- si el alta se guarda correctamente, la misma pantalla muestra `Registro exitoso`
+- el registro no inicia sesion automaticamente; despues debes entrar por login
+
+Mensaje de error visible:
+
+- `El usuario ya esta registrado`
 
 ## 5. Inicio de sesion
 
-Ruta: `Iniciar sesion`
+Pantalla: `Controlador/login.php`
 
-Pasos:
+Puedes iniciar sesion con cualquiera de estas dos opciones:
 
-1. dar clic en `Iniciar sesion`
-2. escribir telefono o nombre de usuario
-3. escribir contrasena
-4. presionar `Iniciar sesion`
+- telefono
+- nombre de usuario
 
-Si los datos son correctos, el sistema abre el panel principal.
+Ademas debes capturar la contrasena exacta con la que fue creada la cuenta.
+
+Si el acceso es correcto:
+
+- se crea la sesion del entrenador
+- el sistema te redirige al panel principal
+
+Si falla:
+
+- te manda a una pantalla de error
+- el mensaje puede indicar que el usuario no existe o que la contrasena es incorrecta
 
 ## 6. Panel principal
 
-En el panel principal el usuario puede consultar:
+Pantalla: `Controlador/principal.php`
 
-- nombre del entrenador
-- victorias y derrotas acumuladas
-- equipo Pokemon actual
+Esta es la pantalla central del usuario autenticado. Aqui se muestran:
+
+- nombre del entrenador activo
+- total acumulado de victorias
+- total acumulado de derrotas
+- sprites del equipo actual guardado en base de datos
 
 Acciones disponibles:
 
@@ -67,188 +91,244 @@ Acciones disponibles:
 - `Consultar oponentes`
 - `Configuracion de cuenta`
 
-## 7. Gestion del equipo Pokemon
+Si todavia no tienes Pokemon cargados, el panel mostrara `Sin Pokemon`.
 
-Ruta: `Editar equipo`
+## 7. Gestion del equipo
 
-En esta pantalla se puede:
+Pantalla: `Vista/equipo.php`
 
-- ver los Pokemon actuales del equipo
-- eliminar Pokemon del equipo
-- agregar nuevos Pokemon
-- abrir la Pokedex para consultar informacion detallada
+Esta vista sirve para revisar, agregar y eliminar Pokemon del equipo.
 
-### 7.1 Reglas del equipo
+### 7.1 Lo que ves en pantalla
 
-- el equipo admite maximo 6 Pokemon
-- no se puede repetir el mismo Pokemon en el mismo equipo
-- solo se pueden agregar Pokemon validos
-- el sistema trabaja con los primeros 151 Pokemon
+- nombre del entrenador
+- lista de Pokemon actuales con sprite, nombre y numero
+- boton `Eliminar` para cada Pokemon del equipo
+- boton `Consultar Pokedex`
+- formulario para agregar Pokemon, solo si aun no llegas a 6 integrantes
 
-### 7.2 Agregar Pokemon
+### 7.2 Reglas reales del equipo
 
-Hay dos formas de busqueda:
+- un entrenador puede tener maximo 6 Pokemon
+- no se puede repetir el mismo Pokemon dentro del mismo equipo
+- el selector visual esta limitado a Pokemon del `1` al `151`
+- cuando el equipo ya tiene 6 integrantes, el formulario de alta deja de mostrarse
 
-- por nombre
-- por numero
+### 7.3 Agregar Pokemon
 
-Pasos:
+El sistema ofrece dos formas de seleccion:
 
-1. entrar a `Editar equipo`
-2. elegir el tipo de busqueda
-3. seleccionar un Pokemon de la sugerencia
-4. presionar `Agregar`
+- buscar por nombre
+- buscar por numero
 
-Si la operacion se realiza correctamente, aparece un mensaje de confirmacion.
+Flujo recomendado:
 
-### 7.3 Eliminar Pokemon
+1. Escribe el nombre o el numero.
+2. Selecciona una opcion de la lista de sugerencias.
+3. Presiona `Agregar`.
 
-Pasos:
+Si todo sale bien aparece:
 
-1. entrar a `Editar equipo`
-2. ubicar el Pokemon que se desea retirar
-3. presionar `Eliminar`
-4. confirmar la accion
+- `Pokemon agregado correctamente.`
 
-## 8. Consultar la Pokedex
+Errores que puede mostrar la vista:
 
-Ruta: `Consultar Pokedex`
+- `Debes seleccionar un Pokemon valido.`
+- `Ya tienes ese Pokemon en tu equipo.`
+- `No puedes tener mas de 6 Pokemon.`
 
-Funciones disponibles:
+### 7.4 Eliminar Pokemon
 
-- ver los primeros 151 Pokemon
-- revisar nombre, numero y sprite
-- abrir una ventana con informacion detallada
+Para quitar un Pokemon:
 
-La ventana de detalle muestra:
+1. Ubica la tarjeta del Pokemon.
+2. Presiona `Eliminar`.
+3. Confirma el mensaje del navegador.
 
-- imagen
+Si se borra correctamente aparece:
+
+- `Pokemon eliminado correctamente.`
+
+## 8. Consulta de la Pokedex
+
+Pantalla: `Vista/verTodosPokemon.php`
+
+Esta vista carga los primeros 151 Pokemon y muestra una cuadricula de tarjetas.
+
+Cada tarjeta incluye:
+
+- sprite
+- nombre
+- numero de Pokedex
+
+Al hacer clic en una tarjeta se abre una ventana modal con:
+
+- imagen principal
 - numero
-- altura
-- peso
+- altura en metros
+- peso en kilogramos
 - experiencia base
-- tipos
+- tipos traducidos al espanol
 - estadisticas base
-- sonido o grito del Pokemon
+- boton para reproducir el grito del Pokemon
 
-## 9. Combates
+Si la consulta a la API falla, la pagina muestra un mensaje de error de carga.
 
-Ruta: `Consultar oponentes`
+## 9. Consulta de oponentes
 
-En esta pantalla se muestran los entrenadores registrados junto con:
+Pantalla: `Vista/combate.php`
+
+Esta pantalla lista a los entrenadores registrados, excepto al usuario actual.
+
+Por cada rival se muestran:
 
 - nombre
 - victorias y derrotas
-- equipo actual
+- sprites de su equipo actual
+- estado para pelear
 
-### 9.1 Requisitos para combatir
+Estados posibles:
 
-- el usuario debe tener 6 Pokemon en su equipo
-- el rival tambien debe tener 6 Pokemon
+- `Completa tu equipo`
+- `Rival incompleto`
+- boton `Retar`
 
-Si no se cumple alguna de estas condiciones, el boton `Retar` no estara disponible.
+Mensaje superior de la pantalla:
 
-### 9.2 Retar a un rival
+- `Necesitas 6 Pokemon para combatir` si tu equipo tiene menos de 6
+- `Listo para combatir` si tu equipo ya esta completo
 
-Pasos:
+## 10. Confirmacion y batalla
 
-1. entrar a `Consultar oponentes`
-2. revisar los rivales disponibles
-3. presionar `Retar`
-4. verificar ambos equipos
-5. presionar `Pelear`
+Pantallas:
 
-### 9.3 Resultado del combate
+- `Vista/retar.php`
+- `Vista/batalla.php`
 
-Despues de la animacion, el sistema muestra:
+### 10.1 Confirmar combate
 
-- marcador de la batalla
-- ganador del combate
-- detalle de cada enfrentamiento Pokemon contra Pokemon
+Antes de pelear, el sistema compara visualmente:
+
+- tu equipo
+- el equipo del rival
+
+El boton `Pelear` solo aparece si ambos equipos ya tienen 6 Pokemon.
+
+### 10.2 Animacion previa
+
+Al comenzar la batalla:
+
+- aparece una animacion con barra de carga
+- se muestran los dos entrenadores
+- se reproducen mensajes y efectos visuales
+- al terminar la carga, el sistema envia el resultado automaticamente
+
+### 10.3 Como decide el ganador
+
+El usuario no elige ataques ni movimientos.
+
+La app hace esto de forma automatica:
+
+1. Toma los 6 Pokemon de cada equipo segun el orden almacenado.
+2. Enfrenta Pokemon contra Pokemon por posicion.
+3. Consulta PokeAPI para leer las estadisticas base de cada uno.
+4. Suma las estadisticas base de cada Pokemon.
+5. Gana cada ronda el Pokemon con la suma mas alta.
+6. Gana la batalla el entrenador que consiga mas rondas.
+
+En caso de empate de estadisticas dentro de una ronda, el codigo actual cuenta esa ronda a favor del rival.
+
+### 10.4 Resultado mostrado
+
+Despues de la animacion se presenta:
+
+- marcador de rondas ganadas por cada entrenador
 - historial total actualizado de victorias y derrotas
+- equipo ganador
+- detalle visual de las 6 peleas
 
-## 10. Configuracion de cuenta
+Ademas, el navegador guarda logros en almacenamiento local, por ejemplo:
 
-Ruta: `Configuracion de cuenta`
+- primera victoria
+- victoria perfecta
+- cinco victorias totales
 
-Opciones disponibles:
+## 11. Configuracion de cuenta
 
-- `Editar datos`
-- `Eliminar cuenta`
-- `Volver al panel`
+Pantallas:
 
-### 10.1 Editar datos
+- `Controlador/configuracion.php`
+- `Controlador/editarCuenta.php`
+- `Controlador/eliminarUsuario.php`
 
-El usuario puede actualizar:
+### 11.1 Menu de configuracion
+
+Desde aqui puedes:
+
+- editar datos
+- eliminar cuenta
+- volver al panel
+
+### 11.2 Editar datos
+
+Datos editables:
 
 - nombre
 - telefono
 - contrasena
+- confirmacion de contrasena
 
-Pasos:
-
-1. entrar a `Configuracion de cuenta`
-2. presionar `Editar datos`
-3. modificar la informacion
-4. escribir y confirmar la contrasena
-5. presionar `Actualizar datos`
-
-Validaciones:
+Validaciones aplicadas:
 
 - todos los campos son obligatorios
-- las contrasenas deben coincidir
+- las dos contrasenas deben coincidir
 - el telefono debe contener solo numeros y al menos 10 digitos
-- no se permite usar nombre o telefono ya registrados por otro usuario
+- no se puede usar nombre o telefono ya registrados por otro usuario
 
-### 10.2 Eliminar cuenta
+Mensajes posibles:
 
-Pasos:
-
-1. entrar a `Configuracion de cuenta`
-2. presionar `Eliminar cuenta`
-3. confirmar la accion
-
-Al eliminar la cuenta tambien se eliminan:
-
-- el equipo Pokemon
-- el historial de combates
-
-## 11. Cerrar sesion
-
-Desde la barra superior se puede seleccionar la opcion `Salir`.
-
-Al hacerlo:
-
-- se cierra la sesion actual
-- el sistema regresa a la pagina principal
-
-## 12. Mensajes frecuentes del sistema
-
-Algunos mensajes que puede mostrar la aplicacion son:
-
-- `Registro exitoso`
-- `El usuario ya esta registrado`
-- `Equipo completo (6 Pokemon)`
-- `Ya tienes ese Pokemon en tu equipo`
-- `Pokemon agregado correctamente`
-- `Pokemon eliminado correctamente`
-- `Necesitas 6 Pokemon para combatir`
-- `Listo para combatir`
+- `Todos los campos son obligatorios`
+- `Las contrasenas no coinciden`
+- `El telefono debe tener al menos 10 digitos y solo numeros`
+- `El nombre o telefono ya esta registrado por otro usuario`
 - `Datos actualizados correctamente`
 
-## 13. Recomendaciones de uso
+### 11.3 Eliminar cuenta
 
-- completar el equipo antes de entrar a combate
-- verificar con cuidado el Pokemon seleccionado antes de agregarlo
-- revisar el historial de combate despues de cada batalla
-- mantener conexion a internet para que la Pokedex y las imagenes carguen correctamente
+La pantalla de confirmacion advierte que se eliminaran:
 
-## 14. Soporte basico ante problemas
+- la cuenta del entrenador
+- su equipo Pokemon
+- sus estadisticas de combate
 
-Si el sistema no funciona como se espera:
+Si confirmas, la app cierra la sesion y vuelve a la pagina principal.
 
-- recargar la pagina
-- verificar que Docker este levantado
-- comprobar que la app responda en `http://localhost:8080`
-- confirmar que exista conexion a internet
-- volver a iniciar sesion si la sesion expiro
+## 12. Cerrar sesion
+
+Accion disponible en la barra superior:
+
+- `Salir`
+
+Al usarla:
+
+- la sesion actual se destruye
+- vuelves a `index.php`
+
+## 13. Limitaciones de uso importantes
+
+Durante las pruebas del sistema conviene considerar esto:
+
+- muchas pantallas dependen de internet para mostrar nombres, sprites, detalles y estadisticas
+- la Pokedex y el calculo de batalla usan datos externos en tiempo real
+- el sistema no maneja movimientos, tipos, niveles ni objetos; solo usa suma de estadisticas base
+- la aplicacion trabaja visualmente con los primeros 151 Pokemon en las pantallas de consulta y alta
+
+## 14. Solucion rapida de problemas
+
+Si algo no carga correctamente:
+
+- verifica que Docker siga levantado
+- confirma que la app abra en `http://localhost:8080`
+- revisa tu conexion a internet
+- vuelve a iniciar sesion si te redirige al login
+- recarga la pagina si la Pokedex o los sprites no aparecen
