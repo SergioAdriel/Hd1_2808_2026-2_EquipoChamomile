@@ -32,13 +32,11 @@ $mensaje = $_GET['msg'] ?? '';
 
         <form method="POST" action="./loguear.php">
 
-            <!-- 👤 USUARIO -->
             <div class="input-field">
                 <input type="text" name="usuario" id="usuario" required />
                 <label for="usuario">Teléfono o Nombre</label>
             </div>
 
-            <!-- 🔑 CONTRASEÑA -->
             <div class="input-field">
                 <input type="password" name="clave" id="clave" required />
                 <label for="clave">Contraseña</label>
@@ -46,7 +44,6 @@ $mensaje = $_GET['msg'] ?? '';
 
             <br>
 
-            <!-- BOTÓN -->
             <button type="submit" class="btn teal lighten-1 waves-effect waves-light">
                 Iniciar Sesión
             </button>
@@ -67,7 +64,6 @@ $mensaje = $_GET['msg'] ?? '';
 
     <br><br>
 
-    <!-- BOTÓN REGRESAR -->
     <a href="../index.php" class="btn blue">
         Volver a la pantalla principal
     </a>
