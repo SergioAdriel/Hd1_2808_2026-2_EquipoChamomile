@@ -17,7 +17,6 @@ $nombre = $_SESSION['trainer_name'];
 <link rel="stylesheet" href="../Vista/css/PokeCSS.css">
 
 <?php
-// 🔥 stats del usuario
 $sql = "SELECT victorias, derrotas FROM combates WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
@@ -30,9 +29,6 @@ $derrotas = $stats['derrotas'] ?? 0;
 
 <div class="container">
 
-<!-- ========================= -->
-<!-- 🧑 PANEL USUARIO -->
-<!-- ========================= -->
 
 <?php
 $sql = "SELECT id_pokemon FROM equipo WHERE id_usuario = ?";
@@ -87,9 +83,6 @@ while ($row = $result->fetch_assoc()) {
 
 </div>
 
-<!-- ========================= -->
-<!-- ⚔️ ACCIONES -->
-<!-- ========================= -->
 
 <div class="center-align" style="margin-top:40px;">
     
