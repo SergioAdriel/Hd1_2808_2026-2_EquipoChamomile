@@ -101,6 +101,7 @@ require __DIR__ . '/../musica.php';
               <li style="padding: 8px 0;">Daniel Gibran Luciano Tellez</li>
               <li style="padding: 8px 0;">Edgar Ivan Hernandez Castellanos</li>
               <li style="padding: 8px 0;">Benilde Rodriguez Gonzalez</li>
+              <li style="padding: 8px 0;">Ricardo Rojas Herrera</li>
             </ul>
           </div>
         </div>
