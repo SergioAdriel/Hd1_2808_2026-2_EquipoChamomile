@@ -69,7 +69,7 @@ require __DIR__ . '/../musica.php';
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Sergio Adriel Muñoz Camarena</li>
               <li style="padding: 8px 0;">Leonardo Apolonio Villagómez</li>
-              <li style="padding: 8px 0;">_________________</li>
+              <li style="padding: 8px 0;">Sebastian Sinhue Cruz Garcia</li>
             </ul>
           </div>
         </div>
@@ -83,7 +83,7 @@ require __DIR__ . '/../musica.php';
             <div style="border-top: 2px solid #2196F3; margin: 10px 0;"></div>
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Irving Rios Chavez</li>
-              <li style="padding: 8px 0;">_________________</li>
+              <li style="padding: 8px 0;">Carlos Rebollar Pineda</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
           </div>
