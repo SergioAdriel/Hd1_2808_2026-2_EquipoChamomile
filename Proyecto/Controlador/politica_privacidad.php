@@ -53,6 +53,7 @@ require __DIR__ . '/../musica.php';
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Juan Gutiérrez Reyes</li>
               <li style="padding: 8px 0;">Arturo Eduardo Leon Magdaleno</li>
+              <li style="padding: 8px 0;">Luis Erick Garcia Sebastian</li>
               <li style="padding: 8px 0;">_________________</li>
             </ul>
           </div>
