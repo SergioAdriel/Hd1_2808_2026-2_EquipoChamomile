@@ -16,25 +16,21 @@ $clave = trim($_POST['clave']);
 $confirmar_clave = trim($_POST['confirmar_clave']);
 $locacionConf = "./configuracion.php";
 
-// 🔍 Validar que ningún campo esté vacío
 if (empty($nombre) || empty($telefono) || empty($clave) || empty($confirmar_clave)) {
     header("Location: $locacionConf?accion=editar&error=campos_vacios");
     exit;
 }
 
-// 🔍 Validar que las contraseñas coincidan
 if ($clave !== $confirmar_clave) {
     header("Location: $locacionConf?accion=editar&error=password_no_coinciden");
     exit;
 }
 
-// 🔍 Validar formato de teléfono (solo números, mínimo 10 dígitos)
 if (!preg_match('/^[0-9]{10,}$/', $telefono)) {
     header("Location: $locacionConf?accion=editar&error=telefono_invalido");
     exit;
 }
 
-// 🔍 Verificar si el teléfono o nombre ya existen en OTRO usuario (diferente al actual)
 $sql = "SELECT id_usuario FROM usuarios WHERE (telefono = ? OR nombre = ?) AND id_usuario != ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ssi", $telefono, $nombre, $trainer_id);
@@ -47,13 +43,11 @@ if ($result->num_rows > 0) {
 }
 $stmt->close();
 
-// 🔄 Actualizar usuario (incluyendo contraseña)
 $sql = "UPDATE usuarios SET nombre = ?, telefono = ?, contrasena = ? WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("sssi", $nombre, $telefono, $clave, $trainer_id);
 
 if ($stmt->execute()) {
-    // ✅ Actualizar también los datos en la sesión
     $_SESSION['nombre'] = $nombre;
     $_SESSION['telefono'] = $telefono;
     
