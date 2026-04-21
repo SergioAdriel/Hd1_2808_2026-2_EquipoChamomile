@@ -2,7 +2,6 @@
 require './conexion.php';
 session_start();
 
-// 🔒 validar sesión
 if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../index.php");
     exit;
@@ -11,13 +10,11 @@ if (!isset($_SESSION['trainer_id'])) {
 $id = $_SESSION['trainer_id'];
 $pokemon = $_POST['pokemon'] ?? '';
 
-// 🔒 validar input
 if (empty($pokemon)) {
     header("Location: ../Vista/equipo.php?error=vacio");
     exit;
 }
 
-// 🔒 validar límite de 6
 $sql_count = "SELECT COUNT(*) total FROM equipo WHERE id_usuario = ?";
 $stmt = $conexion->prepare($sql_count);
 $stmt->bind_param("i", $id);
@@ -41,7 +38,6 @@ if ($result->num_rows > 0) {
     exit;
 }
 
-// ✅ insertar
 $sql = "INSERT INTO equipo (id_usuario, id_pokemon) VALUES (?, ?)";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ii", $id, $pokemon);
@@ -50,7 +46,6 @@ if (!$stmt->execute()) {
     die("Error al insertar: " . $stmt->error);
 }
 
-// 🎉 éxito
 header("Location: ../Vista/equipo.php?ok=1");
 exit;
 ?>
