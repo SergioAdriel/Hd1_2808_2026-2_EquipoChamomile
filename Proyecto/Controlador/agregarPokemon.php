@@ -26,7 +26,7 @@ if ($count >= 6) {
     exit;
 }
 
-// 🔍 verificar duplicado
+// verificar duplicado
 $sql_check = "SELECT * FROM equipo WHERE id_usuario = ? AND id_pokemon = ?";
 $stmt = $conexion->prepare($sql_check);
 $stmt->bind_param("ii", $id, $pokemon);
