@@ -4,7 +4,7 @@ require __DIR__ . "/../Controlador/conexion.php";
 require __DIR__ . '/../musica.php';
 require __DIR__ . "/../header.php";
 
-// 🔒 validar sesión
+// validar sesión
 if (!isset($_SESSION['trainer_id'])) {
     header("Location: ../Controlador/login.php");
     exit;
@@ -13,7 +13,7 @@ if (!isset($_SESSION['trainer_id'])) {
 $id_usuario = $_SESSION['trainer_id'];
 $rival = $_POST['rival'] ?? null;
 
-// 🔒 validar rival
+// validar rival
 if (!$rival || $rival == $id_usuario) {
     header("Location: ./combate.php");
     exit;
@@ -129,7 +129,7 @@ $mostrar_animacion = !isset($_GET['resultado']);
 <?php require __DIR__ . "/../footer.php"; ?>
 
 <?php else: 
-    // ⚔️ Calcular la batalla
+    // Calcular la batalla
     $ganadas1 = 0;
     $ganadas2 = 0;
     $detalle_batallas = [];
@@ -171,7 +171,7 @@ $mostrar_animacion = !isset($_GET['resultado']);
 
     $ganador = ($ganadas1 > $ganadas2) ? $id_usuario : $rival;
 
-    // 🔥 definir equipo ganador
+    // definir equipo ganador
     if ($ganador == $id_usuario) {
         $nombre_ganador = $nombre_user;
         $equipo_ganador = $equipo1;
@@ -182,7 +182,7 @@ $mostrar_animacion = !isset($_GET['resultado']);
         $resultado_final = "derrota";
     }
 
-    // 🔥 actualizar BD
+    // actualizar BD
     $check_user = $conexion->prepare("SELECT victorias FROM combates WHERE id_usuario = ?");
     $check_user->bind_param("i", $id_usuario);
     $check_user->execute();
