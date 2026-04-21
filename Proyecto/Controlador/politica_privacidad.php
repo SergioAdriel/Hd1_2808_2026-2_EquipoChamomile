@@ -84,7 +84,7 @@ require __DIR__ . '/../musica.php';
             <ul style="list-style: none; padding: 0;">
               <li style="padding: 8px 0;">Irving Rios Chavez</li>
               <li style="padding: 8px 0;">Carlos Rebollar Pineda</li>
-              <li style="padding: 8px 0;">_________________</li>
+              <li style="padding: 8px 0;">Oscar Efrén Jiménez García</li>
             </ul>
           </div>
         </div>
