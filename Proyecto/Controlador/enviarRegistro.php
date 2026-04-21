@@ -5,7 +5,6 @@ $nombre = trim($_POST['nombre']);
 $telefono = trim($_POST['telefono']);
 $clave = trim($_POST['clave']);
 
-// 🔍 Validar duplicados (sin decir cuál)
 $sql = "SELECT id_usuario FROM usuarios WHERE telefono = ? OR nombre = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ss", $telefono, $nombre);
@@ -17,7 +16,6 @@ if ($result->num_rows > 0) {
     exit;
 }
 
-// 🔥 Insertar usuario
 $sql = "INSERT INTO usuarios (nombre, telefono, contrasena)
         VALUES (?, ?, ?)";
 
