@@ -6,13 +6,11 @@ if (!isset($_SESSION['trainer_id'])) {
     exit;
 }
 
-// ✅ DEFINIR $accion AQUÍ (antes de usarla)
 $accion = $_GET['accion'] ?? null;
 
 require __DIR__ . '/../musica.php';
 require __DIR__ . "/../header.php";
 
-// Mostrar mensajes de éxito o error
 $mensaje = '';
 $tipo_mensaje = '';
 
@@ -55,14 +53,12 @@ if (isset($_GET['error'])) {
 
 <div class="container center-align">
 
-    <!-- 🔥 MOSTRAR MENSAJE (si existe) -->
     <?php if ($mensaje): ?>
         <div class="card-panel <?php echo $tipo_mensaje; ?> white-text" style="margin-top: 20px;">
             <?php echo $mensaje; ?>
         </div>
     <?php endif; ?>
 
-    <!-- 🔹 MENÚ PRINCIPAL (SIEMPRE SE MUESTRA, HAYA O NO ERROR) -->
     <h4>Configuración de cuenta</h4>
 
         <br><br>
