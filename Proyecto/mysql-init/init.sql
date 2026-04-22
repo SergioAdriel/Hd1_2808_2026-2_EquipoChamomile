@@ -595,8 +595,7 @@ INSERT INTO equipo (id_usuario, id_pokemon) VALUES
 (99, 115),(99, 23),(99, 90),(99, 12),(99, 134),(99, 39);
 
 -- Usuario 100
-INSERT INTO equipo (id_usuario, id_pokemon) VALUES
-(100, 81),(100, 2),(100, 107),(100, 73),(100, 52),(100, 98);
+
 
 -- Se usa la Poke.api para del nuemro de pokemon sacar el JSON de cada pokemon y mostrarlo en la pokedex, pero para el equipo solo se guarda el ID del pokemon, no su información completa.
 -- La idea es que cada vez que un usuario gane o pierda un combate, se actualice su registro en la tabla "combates" para reflejar su historial.
